@@ -10,14 +10,18 @@
 
         body {
             font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
-            margin: 0; padding: 20px; color: #1C1C1E; -webkit-font-smoothing: antialiased;
+            margin: 0;
+            padding: 20px;
+            color: #1C1C1E;
+            -webkit-font-smoothing: antialiased;
             background-color: #f2f5f8;
             background-image: 
                 radial-gradient(at 0% 0%, rgba(169, 193, 255, 0.5) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, rgba(132, 250, 176, 0.4) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(255, 185, 201, 0.4) 0px, transparent 50%),
                 radial-gradient(at 0% 100%, rgba(252, 203, 144, 0.4) 0px, transparent 50%);
-            background-attachment: fixed; background-size: cover;
+            background-attachment: fixed;
+            background-size: cover;
         }
 
         h1, h2, h3 { text-align: center; color: #1C1C1E; font-weight: 600; }
@@ -28,23 +32,39 @@
         .company-header p { margin: 0; color: #5A5A5E; font-size: 15px; }
 
         .card {
-            background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            border-radius: 28px; padding: 40px; max-width: 900px; margin: 0 auto;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08); border: 1px solid rgba(255, 255, 255, 0.7);
-            border-top: 1px solid rgba(255, 255, 255, 0.9); border-left: 1px solid rgba(255, 255, 255, 0.9);
-            display: none; transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 28px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            display: none; 
+            transition: all 0.3s ease;
         }
         .card.active { display: block; animation: scaleIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); } 
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
 
         .menu-container { text-align: center; margin-bottom: 35px; max-width: 100vw; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 5px; }
         .menu-bar { 
-            display: inline-flex; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.6); padding: 6px; border-radius: 99px; gap: 4px; justify-content: center; box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+            display: inline-flex; 
+            background: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 6px; 
+            border-radius: 99px; 
+            gap: 4px; 
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
         }
         .btn-menu {
             background: transparent; color: #5A5A5E; border: none; padding: 12px 24px; font-size: 16px;
-            border-radius: 99px; cursor: pointer; transition: all 0.3s ease; font-family: 'Prompt', sans-serif; font-weight: 500; white-space: nowrap;
+            border-radius: 99px; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
+            font-family: 'Prompt', sans-serif; font-weight: 500; white-space: nowrap;
         }
         .btn-menu:hover { color: #1C1C1E; }
         .btn-menu.active { background: rgba(255, 255, 255, 0.9); color: #007AFF; box-shadow: 0 4px 12px rgba(0,0,0,0.08); font-weight: 600; }
@@ -62,39 +82,42 @@
 
         label { font-weight: 500; margin-top: 15px; display: block; color: #3A3A3C; font-size: 15px; }
         input, select {
-            width: 100%; padding: 16px; margin: 8px 0 20px; background: rgba(255, 255, 255, 0.6); 
-            backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 16px; font-size: 16px; font-family: 'Prompt', sans-serif; box-sizing: border-box; transition: all 0.3s;
+            width: 100%; padding: 16px; margin: 8px 0 20px; 
+            background: rgba(255, 255, 255, 0.6); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 16px; font-size: 16px; font-family: 'Prompt', sans-serif; box-sizing: border-box;
+            transition: all 0.3s;
         }
         input:focus, select:focus { background: rgba(255, 255, 255, 0.9); border-color: #007AFF; outline: none; box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15); }
 
-        /* สไตล์สำหรับปุ่มอัปโหลดไฟล์ */
-        .file-input { padding: 12px; background: rgba(255, 255, 255, 0.6); border: 2px dashed #007AFF; cursor: pointer; }
-        .file-input::file-selector-button { background: #007AFF; color: white; border: none; padding: 8px 16px; border-radius: 99px; margin-right: 15px; font-family: 'Prompt', sans-serif; cursor: pointer; transition: 0.2s; }
-        .file-input::file-selector-button:hover { background: #0056b3; }
-
         .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
-        table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 10px; font-size: 15px; min-width: 750px; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 10px; font-size: 15px; min-width: 700px; }
         th, td { padding: 16px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); vertical-align: middle; }
         th { color: #5A5A5E; font-weight: 500; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
         tr:last-child td { border-bottom: none; }
         tr:hover td { background-color: rgba(255,255,255,0.4); }
         .qty-badge { background: #007AFF; color: #FFFFFF; padding: 6px 14px; border-radius: 99px; font-weight: 600; display: inline-block; box-shadow: 0 2px 8px rgba(0,122,255,0.2); }
         .price-text { color: #34C759; font-weight: 600; }
-        .item-image { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background-color: #fff; }
-        .btn-edit { background: rgba(0, 122, 255, 0.1); color: #007AFF; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-family: 'Prompt'; font-weight: 500; transition: 0.2s; }
+        .item-image { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.1); background-color: #fff; }
+        .btn-edit { background: rgba(0, 122, 255, 0.1); color: #007AFF; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: 'Prompt'; font-weight: 500; transition: 0.2s; }
         .btn-edit:hover { background: #007AFF; color: white; }
 
+        /* ปรับ Dashboard ให้รองรับ 4 กล่อง */
         .dash-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 30px; }
         .dash-box { 
-            padding: 20px 15px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.55); 
+            padding: 20px 15px; border-radius: 24px; text-align: center; 
+            background: rgba(255, 255, 255, 0.55); 
             backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.7);
             box-shadow: 0 8px 24px rgba(0,0,0,0.04); transition: transform 0.3s;
         }
         .dash-box:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
         .dash-box p { margin: 0; color: #5A5A5E; font-size: 15px; font-weight: 500; }
         .dash-box span { font-size: 34px; font-weight: 600; display: block; margin-top: 8px; letter-spacing: -0.5px; }
-        .color-blue { color: #007AFF; } .color-green { color: #34C759; } .color-red { color: #FF3B30; } .color-purple { color: #AF52DE; }
+        .color-blue { color: #007AFF; }
+        .color-green { color: #34C759; }
+        .color-red { color: #FF3B30; }
+        .color-purple { color: #AF52DE; }
 
         .user-info { display: flex; justify-content: flex-end; align-items: center; max-width: 900px; margin: 0 auto 20px; padding: 0 10px; }
         .user-name { font-weight: 500; color: #1C1C1E; font-size: 15px; margin-right: 15px; }
@@ -111,12 +134,18 @@
         .toast {
             min-width: 250px; max-width: 300px; padding: 16px 20px; border-radius: 20px; color: #1C1C1E; font-size: 14px;
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); animation: slideDown 0.4s forwards; border-left: 5px solid transparent;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); animation: slideDown 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            border-left: 5px solid transparent;
         }
-        .toast-warning { border-left-color: #FF9500; } .toast-info { border-left-color: #007AFF; } .toast-danger { border-left-color: #FF3B30; }
+        .toast-warning { border-left-color: #FF9500; }
+        .toast-info { border-left-color: #007AFF; }
+        .toast-danger { border-left-color: #FF3B30; }
         @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        @media screen and (max-width: 1024px) { .dash-grid { grid-template-columns: repeat(2, 1fr); } }
+        /* Responsive */
+        @media screen and (max-width: 1024px) {
+            .dash-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media screen and (max-width: 768px) {
             body { padding: 10px; }
             .card { padding: 25px 20px; border-radius: 24px; }
@@ -231,8 +260,8 @@
                     <input type="number" id="in-price" placeholder="หากไม่ระบุจะเท่ากับ 0">
                 </div>
             </div>
-            <label>อัปโหลดรูปภาพสินค้า (ขนาดไม่เกิน 2MB)</label>
-            <input type="file" id="in-image-file" class="file-input" accept="image/png, image/jpeg, image/webp">
+            <label>ลิงก์รูปภาพสินค้า (URL)</label>
+            <input type="text" id="in-image" placeholder="วางลิงก์รูปภาพ (เช่น https://...)">
             
             <button class="btn-solid-green" style="width: 100%; font-size: 18px; margin-top:10px;" onclick="receiveItem()">ยืนยันการรับสินค้า</button>
         </div>
@@ -267,25 +296,36 @@
             </div>
         </div>
 
-        <!-- หน้าต่างแก้ไขข้อมูลสินค้า -->
+        <!-- หน้าต่างแก้ไขข้อมูลสินค้า (Edit Page) -->
         <div id="edit-item-page" class="card">
             <h2>แก้ไขข้อมูลสินค้า</h2>
-            <p style="text-align: center; color: #FF9500; font-size: 14px;">โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนบันทึก</p>
+            <p style="text-align: center; color: #FF9500; font-size: 14px;">โปรดระมัดระวังในการแก้ไขข้อมูล</p>
             
             <div class="form-grid">
-                <div><label>ชื่อสินค้า</label><input type="text" id="edit-name"></div>
-                <div><label>หมายเลขล็อต</label><input type="text" id="edit-lot"></div>
+                <div>
+                    <label>ชื่อสินค้า</label>
+                    <input type="text" id="edit-name">
+                </div>
+                <div>
+                    <label>หมายเลขล็อต</label>
+                    <input type="text" id="edit-lot">
+                </div>
             </div>
             <div class="form-grid">
-                <div><label>จำนวนคงเหลือ (ชิ้น)</label><input type="number" id="edit-qty"></div>
-                <div><label>ราคาต่อชิ้น (บาท)</label><input type="number" id="edit-price"></div>
+                <div>
+                    <label>จำนวนคงเหลือ (ชิ้น)</label>
+                    <input type="number" id="edit-qty">
+                </div>
+                <div>
+                    <label>ราคาต่อชิ้น (บาท)</label>
+                    <input type="number" id="edit-price">
+                </div>
             </div>
+            <label>ลิงก์รูปภาพสินค้า (URL)</label>
+            <input type="text" id="edit-image">
             
-            <label>อัปโหลดรูปภาพใหม่ (หากไม่ต้องการเปลี่ยนให้เว้นว่างไว้)</label>
-            <input type="file" id="edit-image-file" class="file-input" accept="image/png, image/jpeg, image/webp">
-            
-            <div class="form-grid" style="margin-top: 25px;">
-                <button class="btn-outline" onclick="showPage('stock', document.querySelectorAll('.btn-menu')[4])">ยกเลิก</button>
+            <div class="form-grid" style="margin-top: 15px;">
+                <button class="btn-outline" onclick="showPage('stock')">ยกเลิก</button>
                 <button class="btn-solid-blue" onclick="saveEditItem()">บันทึกการแก้ไข</button>
             </div>
         </div>
@@ -318,9 +358,9 @@
         let doughnutChart = null; 
         let barChart = null;
         
+        // ตัวแปรสำหรับเก็บข้อมูลเดิมตอนกดแก้ไข
         let currentEditOldName = "";
         let currentEditOldLot = "";
-        let currentEditOldImage = ""; 
 
         Chart.defaults.font.family = "'Prompt', sans-serif";
         Chart.defaults.color = '#5A5A5E';
@@ -347,7 +387,9 @@
             let statusDiv = document.getElementById('login-status');
 
             if(!user || !pass) { statusDiv.innerText = "กรุณากรอกชื่อผู้ใช้งานและรหัสผ่านให้ครบถ้วน"; statusDiv.style.color = "#FF3B30"; return; }
-            statusDiv.innerText = "กำลังตรวจสอบข้อมูลในระบบ..."; statusDiv.style.color = "#5A5A5E";
+
+            statusDiv.innerText = "กำลังตรวจสอบข้อมูลในระบบ...";
+            statusDiv.style.color = "#5A5A5E";
 
             try {
                 let url = `${SCRIPT_URL}?action=login&user=${encodeURIComponent(user)}&pass=${encodeURIComponent(pass)}`;
@@ -366,14 +408,19 @@
 
                     fetchStockData(); 
                 } else {
-                    statusDiv.innerText = "ข้อมูลชื่อผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง"; statusDiv.style.color = "#FF3B30";
+                    statusDiv.innerText = "ข้อมูลชื่อผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง";
+                    statusDiv.style.color = "#FF3B30";
                 }
-            } catch (error) { statusDiv.innerText = "เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์"; statusDiv.style.color = "#FF3B30"; }
+            } catch (error) {
+                statusDiv.innerText = "เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์";
+                statusDiv.style.color = "#FF3B30";
+            }
         }
 
         function logout() {
             loggedInUser = "";
-            document.getElementById('login-user').value = ""; document.getElementById('login-pass').value = "";
+            document.getElementById('login-user').value = "";
+            document.getElementById('login-pass').value = "";
             document.getElementById('login-status').innerText = "";
             document.getElementById('app-container').style.display = "none";
             document.getElementById('login-page').classList.add('active');
@@ -385,10 +432,17 @@
                 let response = await fetch(SCRIPT_URL + "?action=get");
                 let data = await response.json();
                 
-                inventory = data.stock; todayLogs = data.logs || [];
-                totalIn = data.in; totalOut = data.out;
+                inventory = data.stock;
+                todayLogs = data.logs || [];
+                totalIn = data.in;
+                totalOut = data.out;
                 
-                updateDashboard(); updateStockTable(); updateIssueDropdown(); updateDailyBarChart(); checkLowStockAlerts();
+                updateDashboard();
+                updateStockTable();
+                updateIssueDropdown();
+                updateDailyBarChart();
+                checkLowStockAlerts();
+
                 document.getElementById('status-text').innerText = "";
             } catch (error) {
                 document.getElementById('status-text').innerText = "ขัดข้อง: ไม่สามารถเชื่อมต่อฐานข้อมูลได้";
@@ -399,21 +453,13 @@
         function showPage(pageId, btnElement) {
             document.querySelectorAll('#app-container .card').forEach(card => card.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
+            
             if (btnElement) {
                 document.querySelectorAll('.btn-menu').forEach(btn => btn.classList.remove('active'));
                 btnElement.classList.add('active');
             }
-            if (pageId === 'issue') updateIssueDropdown();
-        }
 
-        // ตัวแปลงไฟล์ภาพเป็น Base64
-        function getBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            });
+            if (pageId === 'issue') updateIssueDropdown();
         }
 
         async function receiveItem() {
@@ -421,37 +467,23 @@
             const lot = document.getElementById('in-lot').value;
             const qty = parseInt(document.getElementById('in-qty').value);
             const price = parseFloat(document.getElementById('in-price').value) || 0;
-            const fileInput = document.getElementById('in-image-file');
+            const image = document.getElementById('in-image').value;
 
             if (!name || !lot || isNaN(qty) || qty <= 0) { showNotification("ข้อผิดพลาด", "กรุณากรอกข้อมูลที่มีเครื่องหมาย * ให้ถูกต้อง", "danger"); return; }
 
-            let base64Data = "", mimeType = "", fileName = "";
-            if (fileInput.files.length > 0) {
-                let file = fileInput.files[0];
-                if(file.size > 2 * 1024 * 1024) { showNotification("ข้อผิดพลาด", "ขนาดไฟล์ต้องไม่เกิน 2MB", "danger"); return; }
-                let base64String = await getBase64(file);
-                let splitData = base64String.split(',');
-                base64Data = splitData[1];
-                mimeType = splitData[0].match(/:(.*?);/)[1];
-                fileName = file.name;
-            }
-
-            document.getElementById('status-text').innerText = "กำลังประมวลผลอัปโหลดไฟล์และบันทึกข้อมูล...";
+            document.getElementById('status-text').innerText = "กำลังบันทึกรายการรับเข้า...";
+            let url = `${SCRIPT_URL}?action=receive&name=${encodeURIComponent(name)}&lot=${encodeURIComponent(lot)}&qty=${qty}&price=${price}&image=${encodeURIComponent(image)}&user=${encodeURIComponent(loggedInUser)}`;
             
-            let payload = { action: 'receive', name: name, lot: lot, qty: qty, price: price, user: loggedInUser, imageBase64: base64Data, imageMimeType: mimeType, imageName: fileName };
-
             try {
-                let response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload)
-                });
+                let response = await fetch(url);
                 let result = await response.json();
                 if (result.status === 'success') {
-                    showNotification('บันทึกสำเร็จ', `เพิ่มรายการ ${name} เข้าสู่ระบบแล้ว`, 'info');
-                    document.getElementById('in-name').value = ''; document.getElementById('in-lot').value = '';
-                    document.getElementById('in-qty').value = ''; document.getElementById('in-price').value = '';
-                    document.getElementById('in-image-file').value = '';
+                    showNotification('บันทึกสำเร็จ', `เพิ่มรายการ ${name} จำนวน ${qty} ชิ้น เข้าสู่ระบบแล้ว`, 'info');
+                    document.getElementById('in-name').value = '';
+                    document.getElementById('in-lot').value = '';
+                    document.getElementById('in-qty').value = '';
+                    document.getElementById('in-price').value = '';
+                    document.getElementById('in-image').value = '';
                     fetchStockData(); 
                 }
             } catch (error) { showNotification("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลได้", "danger"); }
@@ -483,24 +515,26 @@
                 if (result.status === 'success') {
                     if (issueQty >= 50) { showNotification('การเบิกยอดสูง', `ดำเนินการเบิก ${item.name} จำนวน ${issueQty} ชิ้นเรียบร้อย`, 'danger'); } 
                     else { showNotification('เบิกสินค้าสำเร็จ', `ทำรายการเบิก ${item.name} เรียบร้อย`, 'info'); }
-                    document.getElementById('out-qty').value = ''; fetchStockData(); 
+                    
+                    document.getElementById('out-qty').value = '';
+                    fetchStockData(); 
                 } else { showNotification("ข้อผิดพลาด", "สินค้าไม่เพียงพอ", "danger"); }
             } catch (error) { showNotification("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลได้", "danger"); }
         }
 
+        // ระบบแก้ไขข้อมูล
         function openEditItem(index) {
             let item = inventory[index];
-            currentEditOldName = item.name; currentEditOldLot = item.lot; currentEditOldImage = item.image;
+            currentEditOldName = item.name;
+            currentEditOldLot = item.lot;
             
             document.getElementById('edit-name').value = item.name;
             document.getElementById('edit-lot').value = item.lot;
             document.getElementById('edit-qty').value = item.qty;
             document.getElementById('edit-price').value = item.price || 0;
-            document.getElementById('edit-image-file').value = ''; // รีเซ็ตช่องเลือกไฟล์
-
-            // ย้ายแถบเมนูไปหน้าแก้ไขโดยซ่อนการใช้งานชั่วคราว
-            document.querySelectorAll('.btn-menu').forEach(btn => btn.classList.remove('active'));
-            showPage('edit-item-page', null);
+            document.getElementById('edit-image').value = item.image || "";
+            
+            showPage('edit-item-page');
         }
 
         async function saveEditItem() {
@@ -508,37 +542,23 @@
             let newLot = document.getElementById('edit-lot').value;
             let newQty = parseInt(document.getElementById('edit-qty').value);
             let newPrice = parseFloat(document.getElementById('edit-price').value) || 0;
-            let fileInput = document.getElementById('edit-image-file');
+            let newImage = document.getElementById('edit-image').value;
 
             if(!newName || !newLot || isNaN(newQty) || newQty < 0) { showNotification("ข้อผิดพลาด", "กรุณากรอกข้อมูลให้ครบและถูกต้อง", "danger"); return; }
 
-            let base64Data = "", mimeType = "", fileName = "";
-            if (fileInput.files.length > 0) {
-                let file = fileInput.files[0];
-                if(file.size > 2 * 1024 * 1024) { showNotification("ข้อผิดพลาด", "ขนาดไฟล์ต้องไม่เกิน 2MB", "danger"); return; }
-                let base64String = await getBase64(file);
-                let splitData = base64String.split(',');
-                base64Data = splitData[1];
-                mimeType = splitData[0].match(/:(.*?);/)[1];
-                fileName = file.name;
-            }
-
-            document.getElementById('status-text').innerText = "กำลังประมวลผลอัปเดตข้อมูล...";
+            document.getElementById('status-text').innerText = "กำลังบันทึกการแก้ไข...";
+            let url = `${SCRIPT_URL}?action=edit&oldName=${encodeURIComponent(currentEditOldName)}&oldLot=${encodeURIComponent(currentEditOldLot)}&newName=${encodeURIComponent(newName)}&newLot=${encodeURIComponent(newLot)}&newQty=${newQty}&newPrice=${newPrice}&newImage=${encodeURIComponent(newImage)}&user=${encodeURIComponent(loggedInUser)}`;
             
-            let payload = { action: 'edit', oldName: currentEditOldName, oldLot: currentEditOldLot, newName: newName, newLot: newLot, newQty: newQty, newPrice: newPrice, image: currentEditOldImage, user: loggedInUser, imageBase64: base64Data, imageMimeType: mimeType, imageName: fileName };
-
             try {
-                let response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload)
-                });
+                let response = await fetch(url);
                 let result = await response.json();
                 if (result.status === 'success') {
-                    showNotification('แก้ไขสำเร็จ', `อัปเดตข้อมูลสินค้าเรียบร้อยแล้ว`, 'info');
-                    showPage('stock', document.querySelectorAll('.btn-menu')[4]);
+                    showNotification('แก้ไขสำเร็จ', `อัปเดตข้อมูลสินค้า ${newName} เรียบร้อยแล้ว`, 'info');
+                    showPage('stock');
                     fetchStockData(); 
-                } else { showNotification("ข้อผิดพลาด", "ไม่พบรายการที่ต้องการแก้ไข", "danger"); }
+                } else {
+                    showNotification("ข้อผิดพลาด", "ไม่พบรายการสินค้าที่ต้องการแก้ไข", "danger");
+                }
             } catch (error) { showNotification("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลได้", "danger"); }
         }
 
@@ -547,7 +567,9 @@
             tbody.innerHTML = ''; 
             inventory.forEach((item, index) => {
                 if(item.qty > 0) {
-                    let imgHtml = item.image ? `<img src="${item.image}" class="item-image" alt="รูปสินค้า">` : `<div style="font-size:30px; text-align:center;">📦</div>`;
+                    // จัดการแสดงรูปภาพ หรือแสดงไอคอนกล่องหากไม่มีรูป
+                    let imgHtml = item.image ? `<img src="${item.image}" class="item-image" alt="รูปสินค้า" onerror="this.src='https://via.placeholder.com/50?text=📦'">` : `<div style="font-size:30px;">📦</div>`;
+                    
                     tbody.innerHTML += `
                         <tr>
                             <td>${imgHtml}</td>
@@ -563,8 +585,13 @@
         }
 
         function updateDashboard() {
-            let totalStock = 0, totalValue = 0;
-            inventory.forEach(item => { totalStock += item.qty; totalValue += (item.qty * item.price); });
+            let totalStock = 0;
+            let totalValue = 0;
+            
+            inventory.forEach(item => {
+                totalStock += item.qty;
+                totalValue += (item.qty * item.price);
+            });
 
             document.getElementById('dash-total').innerText = totalStock.toLocaleString();
             document.getElementById('dash-in').innerText = totalIn.toLocaleString();
@@ -578,7 +605,11 @@
                 type: 'doughnut',
                 data: {
                     labels: ['คงเหลือรวม', 'รับเข้า (วันนี้)', 'เบิกออก (วันนี้)'],
-                    datasets: [{ data: [totalStock, totalIn, totalOut], backgroundColor: ['#007AFF', '#34C759', '#FF3B30'], borderWidth: 0, hoverOffset: 4 }]
+                    datasets: [{
+                        data: [totalStock, totalIn, totalOut],
+                        backgroundColor: ['#007AFF', '#34C759', '#FF3B30'],
+                        borderWidth: 0, hoverOffset: 4
+                    }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } } } }
             });
@@ -611,13 +642,17 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { legend: { labels: { usePointStyle: true } } },
-                    scales: { y: { beginAtZero: true, grid: { borderDash: [5, 5], color: 'rgba(0,0,0,0.05)' }, border: { display: false } }, x: { grid: { display: false }, border: { display: false } } }
+                    scales: { 
+                        y: { beginAtZero: true, grid: { borderDash: [5, 5], color: 'rgba(0,0,0,0.05)' }, border: { display: false } },
+                        x: { grid: { display: false }, border: { display: false } }
+                    }
                 }
             });
         }
 
         async function closeDay() {
             let confirmClose = confirm("การยืนยัน: คุณต้องการปิดยอดประจำวันใช่หรือไม่?\n\nระบบจะทำการบันทึกยอดรวมเข้าประวัติการทำงาน และทำการรีเซ็ตตัวเลขความเคลื่อนไหวประจำวัน\n(หมายเหตุ: จำนวนสินค้าคงเหลือในคลังจะไม่ได้รับผลกระทบ)");
+            
             if(confirmClose) {
                 document.getElementById('status-text').innerText = "กำลังประมวลผลการปิดยอด กรุณารอสักครู่...";
                 let url = `${SCRIPT_URL}?action=closeday&user=${encodeURIComponent(loggedInUser)}`;
@@ -625,6 +660,7 @@
                 try {
                     let response = await fetch(url);
                     let result = await response.json();
+                    
                     if(result.status === 'success') {
                         let sum = result.summary;
                         document.getElementById('summary-in').innerText = sum.in.toLocaleString() + " ชิ้น";
@@ -632,7 +668,8 @@
                         document.getElementById('summary-stock').innerText = sum.stock.toLocaleString() + " ชิ้น";
                         document.getElementById('summary-user').innerText = loggedInUser;
                         
-                        showPage('closing-summary', null); fetchStockData(); 
+                        showPage('closing-summary', null);
+                        fetchStockData(); 
                     }
                 } catch (error) { showNotification("ข้อผิดพลาด", "ไม่สามารถประมวลผลการปิดยอดได้", "danger"); }
             }
