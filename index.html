@@ -6,102 +6,49 @@
     <title>ระบบบริหารจัดการคลังสินค้า - บจก.คาเคา ซีเอสอี</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* =========================================
-           UI Upgrade: iOS 27 Pro Max (Liquid Glass)
-           + Responsive Design สำหรับทุกอุปกรณ์
-           ========================================= */
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap');
 
         body {
             font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
-            margin: 0;
-            padding: 20px;
-            color: #1C1C1E;
-            -webkit-font-smoothing: antialiased;
-            
-            /* พื้นหลัง Mesh Gradient แบบพรีเมียม */
+            margin: 0; padding: 20px; color: #1C1C1E; -webkit-font-smoothing: antialiased;
             background-color: #f2f5f8;
             background-image: 
                 radial-gradient(at 0% 0%, rgba(169, 193, 255, 0.5) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, rgba(132, 250, 176, 0.4) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(255, 185, 201, 0.4) 0px, transparent 50%),
                 radial-gradient(at 0% 100%, rgba(252, 203, 144, 0.4) 0px, transparent 50%);
-            background-attachment: fixed;
-            background-size: cover;
+            background-attachment: fixed; background-size: cover;
         }
 
         h1, h2, h3 { text-align: center; color: #1C1C1E; font-weight: 600; }
 
-        /* ส่วนหัวบริษัท */
         .company-header { text-align: center; margin-bottom: 30px; }
-        .company-header img { 
-            height: 110px; 
-            border-radius: 24px; 
-            margin-bottom: 12px; 
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08); 
-        }
+        .company-header img { height: 110px; border-radius: 24px; margin-bottom: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
         .company-header h1 { font-size: 28px; margin: 5px 0; letter-spacing: -0.5px; }
         .company-header p { margin: 0; color: #5A5A5E; font-size: 15px; }
 
-        /* การ์ด (Liquid Glass Effect) */
         .card {
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 28px;
-            padding: 40px;
-            max-width: 850px;
-            margin: 0 auto;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            border-top: 1px solid rgba(255, 255, 255, 0.9);
-            border-left: 1px solid rgba(255, 255, 255, 0.9);
-            display: none; 
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-radius: 28px; padding: 40px; max-width: 900px; margin: 0 auto;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08); border: 1px solid rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.9); border-left: 1px solid rgba(255, 255, 255, 0.9);
+            display: none; transition: all 0.3s ease;
         }
         .card.active { display: block; animation: scaleIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); } 
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
 
-        /* เมนูบาร์ */
-        .menu-container { 
-            text-align: center; 
-            margin-bottom: 35px; 
-            max-width: 100vw;
-        }
+        .menu-container { text-align: center; margin-bottom: 35px; max-width: 100vw; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 5px; }
         .menu-bar { 
-            display: inline-flex; 
-            background: rgba(255, 255, 255, 0.4); 
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 6px; 
-            border-radius: 99px; 
-            gap: 4px; 
-            justify-content: center;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+            display: inline-flex; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.6); padding: 6px; border-radius: 99px; gap: 4px; justify-content: center; box-shadow: 0 8px 32px rgba(0,0,0,0.05);
         }
         .btn-menu {
-            background: transparent;
-            color: #5A5A5E; 
-            border: none;
-            padding: 12px 24px; 
-            font-size: 16px;
-            border-radius: 99px; 
-            cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
-            font-family: 'Prompt', sans-serif;
-            font-weight: 500;
-            white-space: nowrap;
+            background: transparent; color: #5A5A5E; border: none; padding: 12px 24px; font-size: 16px;
+            border-radius: 99px; cursor: pointer; transition: all 0.3s ease; font-family: 'Prompt', sans-serif; font-weight: 500; white-space: nowrap;
         }
         .btn-menu:hover { color: #1C1C1E; }
-        .btn-menu.active {
-            background: rgba(255, 255, 255, 0.9);
-            color: #007AFF; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            font-weight: 600;
-        }
+        .btn-menu.active { background: rgba(255, 255, 255, 0.9); color: #007AFF; box-shadow: 0 4px 12px rgba(0,0,0,0.08); font-weight: 600; }
         
-        /* ปุ่มคำสั่งต่างๆ */
         .btn-solid-blue { background-color: #007AFF; color: white; border: none; box-shadow: 0 4px 14px rgba(0, 122, 255, 0.3); padding: 16px; border-radius: 16px; font-family: 'Prompt'; cursor: pointer; transition: 0.2s; }
         .btn-solid-blue:hover { background-color: #0056b3; transform: translateY(-2px); }
         .btn-solid-green { background-color: #34C759; color: white; border: none; box-shadow: 0 4px 14px rgba(52, 199, 89, 0.3); padding: 16px; border-radius: 16px; font-family: 'Prompt'; cursor: pointer; transition: 0.2s;}
@@ -110,115 +57,85 @@
         .btn-solid-red:hover { transform: translateY(-2px); }
         .btn-solid-dark { background-color: #1C1C1E; color: white; border: none; box-shadow: 0 4px 14px rgba(28, 28, 30, 0.3); margin-top: 25px; padding: 16px; font-size: 18px; width: 100%; border-radius: 16px; font-family: 'Prompt'; cursor: pointer; transition: 0.2s;}
         .btn-solid-dark:hover { transform: translateY(-2px); background-color: #000000; }
+        .btn-outline { background: transparent; border: 2px solid #5A5A5E; color: #5A5A5E; padding: 14px; border-radius: 16px; font-family: 'Prompt'; cursor: pointer; transition: 0.2s; width: 100%; font-weight: 500; }
+        .btn-outline:hover { background: #5A5A5E; color: white; }
 
-        /* ฟอร์มและช่องกรอกข้อมูล */
         label { font-weight: 500; margin-top: 15px; display: block; color: #3A3A3C; font-size: 15px; }
         input, select {
-            width: 100%; padding: 16px; margin: 8px 0 20px; 
-            background: rgba(255, 255, 255, 0.6); 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 16px; font-size: 16px; font-family: 'Prompt', sans-serif; box-sizing: border-box;
-            transition: all 0.3s;
+            width: 100%; padding: 16px; margin: 8px 0 20px; background: rgba(255, 255, 255, 0.6); 
+            backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 16px; font-size: 16px; font-family: 'Prompt', sans-serif; box-sizing: border-box; transition: all 0.3s;
         }
         input:focus, select:focus { background: rgba(255, 255, 255, 0.9); border-color: #007AFF; outline: none; box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15); }
 
-        /* ตารางคลังสินค้า พร้อมระบบ Responsive */
+        /* สไตล์สำหรับปุ่มอัปโหลดไฟล์ */
+        .file-input { padding: 12px; background: rgba(255, 255, 255, 0.6); border: 2px dashed #007AFF; cursor: pointer; }
+        .file-input::file-selector-button { background: #007AFF; color: white; border: none; padding: 8px 16px; border-radius: 99px; margin-right: 15px; font-family: 'Prompt', sans-serif; cursor: pointer; transition: 0.2s; }
+        .file-input::file-selector-button:hover { background: #0056b3; }
+
         .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
-        table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 10px; font-size: 15px; min-width: 500px; }
-        th, td { padding: 16px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 10px; font-size: 15px; min-width: 750px; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); vertical-align: middle; }
         th { color: #5A5A5E; font-weight: 500; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
         tr:last-child td { border-bottom: none; }
         tr:hover td { background-color: rgba(255,255,255,0.4); }
         .qty-badge { background: #007AFF; color: #FFFFFF; padding: 6px 14px; border-radius: 99px; font-weight: 600; display: inline-block; box-shadow: 0 2px 8px rgba(0,122,255,0.2); }
+        .price-text { color: #34C759; font-weight: 600; }
+        .item-image { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background-color: #fff; }
+        .btn-edit { background: rgba(0, 122, 255, 0.1); color: #007AFF; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-family: 'Prompt'; font-weight: 500; transition: 0.2s; }
+        .btn-edit:hover { background: #007AFF; color: white; }
 
-        /* กล่อง Dashboard */
-        .dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+        .dash-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 30px; }
         .dash-box { 
-            padding: 25px 20px; border-radius: 24px; text-align: center; 
-            background: rgba(255, 255, 255, 0.55); 
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            padding: 20px 15px; border-radius: 24px; text-align: center; background: rgba(255, 255, 255, 0.55); 
+            backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04); transition: transform 0.3s;
         }
         .dash-box:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-        .dash-box p { margin: 0; color: #5A5A5E; font-size: 16px; font-weight: 500; }
-        .dash-box span { font-size: 44px; font-weight: 600; display: block; margin-top: 10px; letter-spacing: -1px; }
-        .color-blue { color: #007AFF; }
-        .color-green { color: #34C759; }
-        .color-red { color: #FF3B30; }
+        .dash-box p { margin: 0; color: #5A5A5E; font-size: 15px; font-weight: 500; }
+        .dash-box span { font-size: 34px; font-weight: 600; display: block; margin-top: 8px; letter-spacing: -0.5px; }
+        .color-blue { color: #007AFF; } .color-green { color: #34C759; } .color-red { color: #FF3B30; } .color-purple { color: #AF52DE; }
 
-        /* ข้อมูลผู้ใช้งาน */
-        .user-info { display: flex; justify-content: flex-end; align-items: center; max-width: 850px; margin: 0 auto 20px; padding: 0 10px; }
+        .user-info { display: flex; justify-content: flex-end; align-items: center; max-width: 900px; margin: 0 auto 20px; padding: 0 10px; }
         .user-name { font-weight: 500; color: #1C1C1E; font-size: 15px; margin-right: 15px; }
         .btn-logout { padding: 8px 16px; border-radius: 99px; border: 1px solid rgba(255, 59, 48, 0.3); background: rgba(255,255,255,0.5); color: #FF3B30; cursor: pointer; font-family: 'Prompt'; font-weight: 500; transition: 0.2s; }
         .btn-logout:hover { background: #FF3B30; color: white; }
 
-        /* กราฟ */
         .chart-wrapper { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 35px; }
         .chart-container { width: 100%; max-width: 320px; height: 320px; }
         .bar-chart-container { width: 100%; height: 380px; margin-top: 25px; }
 
         #status-text { text-align: center; color: #007AFF; font-weight: 500; height: 24px; margin-bottom: 15px; font-size: 14px; }
 
-        /* หน้าต่างแจ้งเตือน (Toasts) */
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; }
         .toast {
             min-width: 250px; max-width: 300px; padding: 16px 20px; border-radius: 20px; color: #1C1C1E; font-size: 14px;
-            background: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(25px); 
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-            animation: slideDown 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            border-left: 5px solid transparent;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); animation: slideDown 0.4s forwards; border-left: 5px solid transparent;
         }
-        .toast-warning { border-left-color: #FF9500; }
-        .toast-info { border-left-color: #007AFF; }
-        .toast-danger { border-left-color: #FF3B30; }
+        .toast-warning { border-left-color: #FF9500; } .toast-info { border-left-color: #007AFF; } .toast-danger { border-left-color: #FF3B30; }
         @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* =========================================
-           Responsive Design สำหรับ Mobile & Tablet
-           ========================================= */
+        @media screen and (max-width: 1024px) { .dash-grid { grid-template-columns: repeat(2, 1fr); } }
         @media screen and (max-width: 768px) {
             body { padding: 10px; }
             .card { padding: 25px 20px; border-radius: 24px; }
-            .company-header h1 { font-size: 24px; }
-            .company-header img { height: 90px; }
-            
-            /* ปรับให้เมนูเลื่อนซ้าย-ขวาได้บนมือถือ */
-            .menu-container { overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch; }
-            .menu-bar { flex-wrap: nowrap; justify-content: flex-start; padding: 6px 10px; margin: 0 5px; }
-            .btn-menu { padding: 10px 18px; font-size: 14px; }
-            
-            /* ปรับแดชบอร์ดเป็น 1 คอลัมน์บนมือถือ */
             .dash-grid { grid-template-columns: 1fr; gap: 15px; margin-top: 20px; }
-            .dash-box { padding: 20px 15px; }
-            .dash-box span { font-size: 36px; }
-            
-            .chart-container { height: 280px; }
-            .bar-chart-container { height: 300px; }
-
-            /* จัดตำแหน่งผู้ใช้งานใหม่บนมือถือ */
+            .menu-bar { justify-content: flex-start; margin: 0 5px; }
             .user-info { flex-direction: column; align-items: flex-end; gap: 10px; margin-bottom: 15px; }
             .user-name { margin-right: 0; }
-
-            /* แจ้งเตือนแสดงตรงกลางหรือขอบจอมือถือ */
             #toast-container { top: 10px; right: 10px; left: 10px; align-items: center; }
             .toast { min-width: 90%; }
         }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media screen and (max-width: 768px) { .form-grid { grid-template-columns: 1fr; gap: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- ระบบแจ้งเตือน (Toasts) -->
     <div id="toast-container"></div>
 
-    <!-- ส่วนหัวองค์กร -->
     <div class="company-header">
         <img src="https://img2.pic.in.th/image7e25937f6259175c.png" alt="โลโก้ บจก.คาเคา ซีเอสอี">
         <h1>บจก.คาเคา ซีเอสอี</h1>
@@ -229,13 +146,10 @@
     <div id="login-page" class="card active">
         <h2>เข้าสู่ระบบพนักงาน</h2>
         <p style="text-align: center; color: #5A5A5E; font-size: 14px; margin-bottom: 25px;">กรุณาระบุข้อมูลเพื่อยืนยันตัวตนการเข้าใช้งาน</p>
-        
         <label>ชื่อผู้ใช้งาน (Username)</label>
         <input type="text" id="login-user" placeholder="ระบุชื่อผู้ใช้งาน">
-        
         <label>รหัสผ่าน (Password)</label>
         <input type="password" id="login-pass" placeholder="ระบุรหัสผ่าน">
-        
         <button class="btn-solid-blue" style="width: 100%; font-size: 18px; margin-top: 15px;" onclick="login()">เข้าสู่ระบบ</button>
         <div id="login-status" style="text-align: center; margin-top: 20px; font-size: 14px; font-weight: 500;"></div>
     </div>
@@ -250,7 +164,6 @@
 
         <div id="status-text"></div> 
 
-        <!-- ดีไซน์เมนู (Segmented Control แบบโปร่งแสง) -->
         <div class="menu-container">
             <div class="menu-bar">
                 <button class="btn-menu active" onclick="showPage('dashboard', this)">📊 แดชบอร์ด</button>
@@ -264,7 +177,6 @@
         <!-- Dashboard -->
         <div id="dashboard" class="card active">
             <h2>ภาพรวมคลังสินค้า</h2>
-            
             <div class="dash-grid">
                 <div class="dash-box">
                     <p>สินค้าคงเหลือรวม</p>
@@ -278,12 +190,14 @@
                     <p>เบิกออก (วันนี้)</p>
                     <span class="color-red" id="dash-out">0</span>
                 </div>
+                <div class="dash-box">
+                    <p>มูลค่าคลังสินค้า (฿)</p>
+                    <span class="color-purple" id="dash-value">0</span>
+                </div>
             </div>
-
             <div class="chart-wrapper">
                 <div class="chart-container"><canvas id="stockDoughnutChart"></canvas></div>
             </div>
-
             <button class="btn-solid-dark" onclick="closeDay()">ปิดยอดประจำวัน</button>
         </div>
 
@@ -297,13 +211,30 @@
         <!-- Receive -->
         <div id="receive" class="card">
             <h2>บันทึกรับสินค้าเข้าคลัง</h2>
-            <label>ชื่อสินค้า</label>
-            <input type="text" id="in-name" placeholder="ตัวอย่าง: สมุดบันทึก, ปากกา">
-            <label>หมายเลขล็อต (Lot Number)</label>
-            <input type="text" id="in-lot" placeholder="ตัวอย่าง: L-001">
-            <label>จำนวน (ชิ้น)</label>
-            <input type="number" id="in-qty" placeholder="ระบุจำนวนตัวเลข">
-            <button class="btn-solid-green" style="width: 100%; font-size: 18px; margin-top:15px;" onclick="receiveItem()">ยืนยันการรับสินค้า</button>
+            <div class="form-grid">
+                <div>
+                    <label>ชื่อสินค้า <span style="color:red;">*</span></label>
+                    <input type="text" id="in-name" placeholder="ตัวอย่าง: สมุดบันทึก">
+                </div>
+                <div>
+                    <label>หมายเลขล็อต <span style="color:red;">*</span></label>
+                    <input type="text" id="in-lot" placeholder="ตัวอย่าง: L-001">
+                </div>
+            </div>
+            <div class="form-grid">
+                <div>
+                    <label>จำนวน (ชิ้น) <span style="color:red;">*</span></label>
+                    <input type="number" id="in-qty" placeholder="ระบุจำนวนตัวเลข">
+                </div>
+                <div>
+                    <label>ราคาต่อชิ้น (บาท)</label>
+                    <input type="number" id="in-price" placeholder="หากไม่ระบุจะเท่ากับ 0">
+                </div>
+            </div>
+            <label>อัปโหลดรูปภาพสินค้า (ขนาดไม่เกิน 2MB)</label>
+            <input type="file" id="in-image-file" class="file-input" accept="image/png, image/jpeg, image/webp">
+            
+            <button class="btn-solid-green" style="width: 100%; font-size: 18px; margin-top:10px;" onclick="receiveItem()">ยืนยันการรับสินค้า</button>
         </div>
 
         <!-- Issue -->
@@ -319,14 +250,16 @@
         <!-- Stock -->
         <div id="stock" class="card">
             <h2>รายงานสินค้าคงเหลือ</h2>
-            <!-- หุ้มตารางด้วย div เพื่อให้สามารถเลื่อนซ้ายขวาบนมือถือได้ -->
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
+                            <th>รูปภาพ</th>
                             <th>รายการสินค้า</th>
                             <th>หมายเลขล็อต</th>
-                            <th style="text-align: center;">คงเหลือ (ชิ้น)</th>
+                            <th>ราคา(฿)</th>
+                            <th style="text-align: center;">คงเหลือ</th>
+                            <th style="text-align: center;">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody id="stock-table"></tbody>
@@ -334,10 +267,32 @@
             </div>
         </div>
 
+        <!-- หน้าต่างแก้ไขข้อมูลสินค้า -->
+        <div id="edit-item-page" class="card">
+            <h2>แก้ไขข้อมูลสินค้า</h2>
+            <p style="text-align: center; color: #FF9500; font-size: 14px;">โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนบันทึก</p>
+            
+            <div class="form-grid">
+                <div><label>ชื่อสินค้า</label><input type="text" id="edit-name"></div>
+                <div><label>หมายเลขล็อต</label><input type="text" id="edit-lot"></div>
+            </div>
+            <div class="form-grid">
+                <div><label>จำนวนคงเหลือ (ชิ้น)</label><input type="number" id="edit-qty"></div>
+                <div><label>ราคาต่อชิ้น (บาท)</label><input type="number" id="edit-price"></div>
+            </div>
+            
+            <label>อัปโหลดรูปภาพใหม่ (หากไม่ต้องการเปลี่ยนให้เว้นว่างไว้)</label>
+            <input type="file" id="edit-image-file" class="file-input" accept="image/png, image/jpeg, image/webp">
+            
+            <div class="form-grid" style="margin-top: 25px;">
+                <button class="btn-outline" onclick="showPage('stock', document.querySelectorAll('.btn-menu')[4])">ยกเลิก</button>
+                <button class="btn-solid-blue" onclick="saveEditItem()">บันทึกการแก้ไข</button>
+            </div>
+        </div>
+
         <!-- Closing Summary -->
         <div id="closing-summary" class="card">
             <h2 style="color: #34C759; margin-bottom: 25px;">ดำเนินการปิดยอดสำเร็จ</h2>
-            
             <div style="background: rgba(255,255,255,0.6); padding: 25px; border-radius: 20px; margin-bottom: 30px; font-size: 16px; line-height: 2; border: 1px solid rgba(255,255,255,0.8);">
                 <strong style="font-size: 18px; color:#1C1C1E;">สรุปข้อมูลประจำวัน:</strong><br>
                 <span style="color:#5A5A5E;">ยอดรับเข้าวันนี้:</span> <span id="summary-in" style="font-weight:600; color:#34C759; float:right;">0 ชิ้น</span><br>
@@ -346,7 +301,6 @@
                 <span style="color:#1C1C1E; font-weight: 500;">สินค้าคงเหลือในคลังรวม:</span> <span id="summary-stock" style="font-weight:600; color:#007AFF; float:right;">0 ชิ้น</span><br>
                 <span style="color:#5A5A5E; font-size: 14px;">ผู้ดำเนินการประมวลผล: <span id="summary-user"></span></span>
             </div>
-            
             <button class="btn-solid-blue" style="width: 100%;" onclick="showPage('dashboard', document.querySelector('.btn-menu'))">กลับสู่แผงควบคุมหลัก</button>
         </div>
     </div>
@@ -363,6 +317,10 @@
         let loggedInUser = ""; 
         let doughnutChart = null; 
         let barChart = null;
+        
+        let currentEditOldName = "";
+        let currentEditOldLot = "";
+        let currentEditOldImage = ""; 
 
         Chart.defaults.font.family = "'Prompt', sans-serif";
         Chart.defaults.color = '#5A5A5E';
@@ -389,9 +347,7 @@
             let statusDiv = document.getElementById('login-status');
 
             if(!user || !pass) { statusDiv.innerText = "กรุณากรอกชื่อผู้ใช้งานและรหัสผ่านให้ครบถ้วน"; statusDiv.style.color = "#FF3B30"; return; }
-
-            statusDiv.innerText = "กำลังตรวจสอบข้อมูลในระบบ...";
-            statusDiv.style.color = "#5A5A5E";
+            statusDiv.innerText = "กำลังตรวจสอบข้อมูลในระบบ..."; statusDiv.style.color = "#5A5A5E";
 
             try {
                 let url = `${SCRIPT_URL}?action=login&user=${encodeURIComponent(user)}&pass=${encodeURIComponent(pass)}`;
@@ -410,19 +366,14 @@
 
                     fetchStockData(); 
                 } else {
-                    statusDiv.innerText = "ข้อมูลชื่อผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง";
-                    statusDiv.style.color = "#FF3B30";
+                    statusDiv.innerText = "ข้อมูลชื่อผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง"; statusDiv.style.color = "#FF3B30";
                 }
-            } catch (error) {
-                statusDiv.innerText = "เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์";
-                statusDiv.style.color = "#FF3B30";
-            }
+            } catch (error) { statusDiv.innerText = "เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์"; statusDiv.style.color = "#FF3B30"; }
         }
 
         function logout() {
             loggedInUser = "";
-            document.getElementById('login-user').value = "";
-            document.getElementById('login-pass').value = "";
+            document.getElementById('login-user').value = ""; document.getElementById('login-pass').value = "";
             document.getElementById('login-status').innerText = "";
             document.getElementById('app-container').style.display = "none";
             document.getElementById('login-page').classList.add('active');
@@ -434,17 +385,10 @@
                 let response = await fetch(SCRIPT_URL + "?action=get");
                 let data = await response.json();
                 
-                inventory = data.stock;
-                todayLogs = data.logs || [];
-                totalIn = data.in;
-                totalOut = data.out;
+                inventory = data.stock; todayLogs = data.logs || [];
+                totalIn = data.in; totalOut = data.out;
                 
-                updateDashboard();
-                updateStockTable();
-                updateIssueDropdown();
-                updateDailyBarChart();
-                checkLowStockAlerts();
-
+                updateDashboard(); updateStockTable(); updateIssueDropdown(); updateDailyBarChart(); checkLowStockAlerts();
                 document.getElementById('status-text').innerText = "";
             } catch (error) {
                 document.getElementById('status-text').innerText = "ขัดข้อง: ไม่สามารถเชื่อมต่อฐานข้อมูลได้";
@@ -455,33 +399,59 @@
         function showPage(pageId, btnElement) {
             document.querySelectorAll('#app-container .card').forEach(card => card.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            
             if (btnElement) {
                 document.querySelectorAll('.btn-menu').forEach(btn => btn.classList.remove('active'));
                 btnElement.classList.add('active');
             }
-
             if (pageId === 'issue') updateIssueDropdown();
+        }
+
+        // ตัวแปลงไฟล์ภาพเป็น Base64
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
         }
 
         async function receiveItem() {
             const name = document.getElementById('in-name').value;
             const lot = document.getElementById('in-lot').value;
             const qty = parseInt(document.getElementById('in-qty').value);
+            const price = parseFloat(document.getElementById('in-price').value) || 0;
+            const fileInput = document.getElementById('in-image-file');
 
-            if (!name || !lot || isNaN(qty) || qty <= 0) { showNotification("ข้อผิดพลาด", "กรุณากรอกข้อมูลให้ครบถ้วนและระบุจำนวนที่ถูกต้อง", "danger"); return; }
+            if (!name || !lot || isNaN(qty) || qty <= 0) { showNotification("ข้อผิดพลาด", "กรุณากรอกข้อมูลที่มีเครื่องหมาย * ให้ถูกต้อง", "danger"); return; }
 
-            document.getElementById('status-text').innerText = "กำลังบันทึกรายการรับเข้า...";
-            let url = `${SCRIPT_URL}?action=receive&name=${encodeURIComponent(name)}&lot=${encodeURIComponent(lot)}&qty=${qty}&user=${encodeURIComponent(loggedInUser)}`;
+            let base64Data = "", mimeType = "", fileName = "";
+            if (fileInput.files.length > 0) {
+                let file = fileInput.files[0];
+                if(file.size > 2 * 1024 * 1024) { showNotification("ข้อผิดพลาด", "ขนาดไฟล์ต้องไม่เกิน 2MB", "danger"); return; }
+                let base64String = await getBase64(file);
+                let splitData = base64String.split(',');
+                base64Data = splitData[1];
+                mimeType = splitData[0].match(/:(.*?);/)[1];
+                fileName = file.name;
+            }
+
+            document.getElementById('status-text').innerText = "กำลังประมวลผลอัปโหลดไฟล์และบันทึกข้อมูล...";
             
+            let payload = { action: 'receive', name: name, lot: lot, qty: qty, price: price, user: loggedInUser, imageBase64: base64Data, imageMimeType: mimeType, imageName: fileName };
+
             try {
-                let response = await fetch(url);
+                let response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
                 let result = await response.json();
                 if (result.status === 'success') {
-                    showNotification('บันทึกสำเร็จ', `เพิ่มรายการ ${name} จำนวน ${qty} ชิ้น เข้าสู่ระบบแล้ว`, 'info');
-                    document.getElementById('in-name').value = '';
-                    document.getElementById('in-lot').value = '';
-                    document.getElementById('in-qty').value = '';
+                    showNotification('บันทึกสำเร็จ', `เพิ่มรายการ ${name} เข้าสู่ระบบแล้ว`, 'info');
+                    document.getElementById('in-name').value = ''; document.getElementById('in-lot').value = '';
+                    document.getElementById('in-qty').value = ''; document.getElementById('in-price').value = '';
+                    document.getElementById('in-image-file').value = '';
                     fetchStockData(); 
                 }
             } catch (error) { showNotification("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลได้", "danger"); }
@@ -513,28 +483,93 @@
                 if (result.status === 'success') {
                     if (issueQty >= 50) { showNotification('การเบิกยอดสูง', `ดำเนินการเบิก ${item.name} จำนวน ${issueQty} ชิ้นเรียบร้อย`, 'danger'); } 
                     else { showNotification('เบิกสินค้าสำเร็จ', `ทำรายการเบิก ${item.name} เรียบร้อย`, 'info'); }
-                    
-                    document.getElementById('out-qty').value = '';
-                    fetchStockData(); 
+                    document.getElementById('out-qty').value = ''; fetchStockData(); 
                 } else { showNotification("ข้อผิดพลาด", "สินค้าไม่เพียงพอ", "danger"); }
+            } catch (error) { showNotification("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลได้", "danger"); }
+        }
+
+        function openEditItem(index) {
+            let item = inventory[index];
+            currentEditOldName = item.name; currentEditOldLot = item.lot; currentEditOldImage = item.image;
+            
+            document.getElementById('edit-name').value = item.name;
+            document.getElementById('edit-lot').value = item.lot;
+            document.getElementById('edit-qty').value = item.qty;
+            document.getElementById('edit-price').value = item.price || 0;
+            document.getElementById('edit-image-file').value = ''; // รีเซ็ตช่องเลือกไฟล์
+
+            // ย้ายแถบเมนูไปหน้าแก้ไขโดยซ่อนการใช้งานชั่วคราว
+            document.querySelectorAll('.btn-menu').forEach(btn => btn.classList.remove('active'));
+            showPage('edit-item-page', null);
+        }
+
+        async function saveEditItem() {
+            let newName = document.getElementById('edit-name').value;
+            let newLot = document.getElementById('edit-lot').value;
+            let newQty = parseInt(document.getElementById('edit-qty').value);
+            let newPrice = parseFloat(document.getElementById('edit-price').value) || 0;
+            let fileInput = document.getElementById('edit-image-file');
+
+            if(!newName || !newLot || isNaN(newQty) || newQty < 0) { showNotification("ข้อผิดพลาด", "กรุณากรอกข้อมูลให้ครบและถูกต้อง", "danger"); return; }
+
+            let base64Data = "", mimeType = "", fileName = "";
+            if (fileInput.files.length > 0) {
+                let file = fileInput.files[0];
+                if(file.size > 2 * 1024 * 1024) { showNotification("ข้อผิดพลาด", "ขนาดไฟล์ต้องไม่เกิน 2MB", "danger"); return; }
+                let base64String = await getBase64(file);
+                let splitData = base64String.split(',');
+                base64Data = splitData[1];
+                mimeType = splitData[0].match(/:(.*?);/)[1];
+                fileName = file.name;
+            }
+
+            document.getElementById('status-text').innerText = "กำลังประมวลผลอัปเดตข้อมูล...";
+            
+            let payload = { action: 'edit', oldName: currentEditOldName, oldLot: currentEditOldLot, newName: newName, newLot: newLot, newQty: newQty, newPrice: newPrice, image: currentEditOldImage, user: loggedInUser, imageBase64: base64Data, imageMimeType: mimeType, imageName: fileName };
+
+            try {
+                let response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+                let result = await response.json();
+                if (result.status === 'success') {
+                    showNotification('แก้ไขสำเร็จ', `อัปเดตข้อมูลสินค้าเรียบร้อยแล้ว`, 'info');
+                    showPage('stock', document.querySelectorAll('.btn-menu')[4]);
+                    fetchStockData(); 
+                } else { showNotification("ข้อผิดพลาด", "ไม่พบรายการที่ต้องการแก้ไข", "danger"); }
             } catch (error) { showNotification("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลได้", "danger"); }
         }
 
         function updateStockTable() {
             const tbody = document.getElementById('stock-table');
             tbody.innerHTML = ''; 
-            inventory.forEach(item => {
+            inventory.forEach((item, index) => {
                 if(item.qty > 0) {
-                    tbody.innerHTML += `<tr><td><strong>${item.name}</strong></td><td>${item.lot}</td><td style="text-align:center;"><span class="qty-badge">${item.qty}</span></td></tr>`;
+                    let imgHtml = item.image ? `<img src="${item.image}" class="item-image" alt="รูปสินค้า">` : `<div style="font-size:30px; text-align:center;">📦</div>`;
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${imgHtml}</td>
+                            <td><strong>${item.name}</strong></td>
+                            <td>${item.lot}</td>
+                            <td class="price-text">${item.price.toLocaleString()}</td>
+                            <td style="text-align:center;"><span class="qty-badge">${item.qty.toLocaleString()}</span></td>
+                            <td style="text-align:center;"><button class="btn-edit" onclick="openEditItem(${index})">แก้ไข</button></td>
+                        </tr>
+                    `;
                 }
             });
         }
 
         function updateDashboard() {
-            let totalStock = inventory.reduce((sum, item) => sum + item.qty, 0);
-            document.getElementById('dash-total').innerText = totalStock;
-            document.getElementById('dash-in').innerText = totalIn;
-            document.getElementById('dash-out').innerText = totalOut;
+            let totalStock = 0, totalValue = 0;
+            inventory.forEach(item => { totalStock += item.qty; totalValue += (item.qty * item.price); });
+
+            document.getElementById('dash-total').innerText = totalStock.toLocaleString();
+            document.getElementById('dash-in').innerText = totalIn.toLocaleString();
+            document.getElementById('dash-out').innerText = totalOut.toLocaleString();
+            document.getElementById('dash-value').innerText = totalValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
             let ctx = document.getElementById('stockDoughnutChart').getContext('2d');
             if(doughnutChart != null) doughnutChart.destroy(); 
@@ -543,11 +578,7 @@
                 type: 'doughnut',
                 data: {
                     labels: ['คงเหลือรวม', 'รับเข้า (วันนี้)', 'เบิกออก (วันนี้)'],
-                    datasets: [{
-                        data: [totalStock, totalIn, totalOut],
-                        backgroundColor: ['#007AFF', '#34C759', '#FF3B30'],
-                        borderWidth: 0, hoverOffset: 4
-                    }]
+                    datasets: [{ data: [totalStock, totalIn, totalOut], backgroundColor: ['#007AFF', '#34C759', '#FF3B30'], borderWidth: 0, hoverOffset: 4 }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } } } }
             });
@@ -580,17 +611,13 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { legend: { labels: { usePointStyle: true } } },
-                    scales: { 
-                        y: { beginAtZero: true, grid: { borderDash: [5, 5], color: 'rgba(0,0,0,0.05)' }, border: { display: false } },
-                        x: { grid: { display: false }, border: { display: false } }
-                    }
+                    scales: { y: { beginAtZero: true, grid: { borderDash: [5, 5], color: 'rgba(0,0,0,0.05)' }, border: { display: false } }, x: { grid: { display: false }, border: { display: false } } }
                 }
             });
         }
 
         async function closeDay() {
             let confirmClose = confirm("การยืนยัน: คุณต้องการปิดยอดประจำวันใช่หรือไม่?\n\nระบบจะทำการบันทึกยอดรวมเข้าประวัติการทำงาน และทำการรีเซ็ตตัวเลขความเคลื่อนไหวประจำวัน\n(หมายเหตุ: จำนวนสินค้าคงเหลือในคลังจะไม่ได้รับผลกระทบ)");
-            
             if(confirmClose) {
                 document.getElementById('status-text').innerText = "กำลังประมวลผลการปิดยอด กรุณารอสักครู่...";
                 let url = `${SCRIPT_URL}?action=closeday&user=${encodeURIComponent(loggedInUser)}`;
@@ -598,16 +625,14 @@
                 try {
                     let response = await fetch(url);
                     let result = await response.json();
-                    
                     if(result.status === 'success') {
                         let sum = result.summary;
-                        document.getElementById('summary-in').innerText = sum.in + " ชิ้น";
-                        document.getElementById('summary-out').innerText = sum.out + " ชิ้น";
-                        document.getElementById('summary-stock').innerText = sum.stock + " ชิ้น";
+                        document.getElementById('summary-in').innerText = sum.in.toLocaleString() + " ชิ้น";
+                        document.getElementById('summary-out').innerText = sum.out.toLocaleString() + " ชิ้น";
+                        document.getElementById('summary-stock').innerText = sum.stock.toLocaleString() + " ชิ้น";
                         document.getElementById('summary-user').innerText = loggedInUser;
                         
-                        showPage('closing-summary', null);
-                        fetchStockData(); 
+                        showPage('closing-summary', null); fetchStockData(); 
                     }
                 } catch (error) { showNotification("ข้อผิดพลาด", "ไม่สามารถประมวลผลการปิดยอดได้", "danger"); }
             }
