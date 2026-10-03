@@ -23,14 +23,13 @@
         body {
             font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0; padding: 20px; color: #1C1C1E; -webkit-font-smoothing: antialiased;
-            background-color: #eef2f9; /* สีพื้นหลังฐาน */
+            background-color: #eef2f9; 
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
             z-index: 0;
         }
 
-        /* เอฟเฟกต์ก้อนสีเคลื่อนไหวพื้นหลัง (ทำให้ Liquid Glass ดูมีมิติเวลามันเบลอ) */
         body::before, body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;
         }
@@ -54,7 +53,6 @@
         .company-header { text-align: center; margin-bottom: 30px; animation: smoothFadeIn 0.8s ease-out; }
         .company-header img { 
             height: 100px; border-radius: 30px; margin-bottom: 12px; 
-            /* Liquid Glass Effect สำหรับโลโก้ */
             background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255,255,255,0.9); border-left: 1px solid rgba(255,255,255,0.6);
@@ -65,22 +63,20 @@
         .company-header h1 { font-size: 26px; margin: 5px 0; }
         .company-header p { margin: 0; color: #5A5A5E; font-size: 15px; font-weight: 500; }
 
-        /* 🔥 Liquid Glass UI สำหรับ Card หลัก 🔥 */
         .card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
             backdrop-filter: blur(35px) saturate(180%); -webkit-backdrop-filter: blur(35px) saturate(180%);
             border-radius: 36px; padding: 40px; max-width: 900px; margin: 0 auto;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-top: 1px solid rgba(255, 255, 255, 0.8); /* ขอบบนสะท้อนแสง */
-            border-left: 1px solid rgba(255, 255, 255, 0.5); /* ขอบซ้ายสะท้อนแสง */
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05), inset 0 2px 5px rgba(255,255,255,0.5); /* เงาในให้ดูมีความหนา */
-            display: none; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05), inset 0 2px 5px rgba(255,255,255,0.5); 
+            display: none; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .card.active { display: block; animation: bouncyScaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; } 
-        @keyframes bouncyScaleIn { 0% { opacity: 0; transform: scale(0.92) translateY(15px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes bouncyScaleIn { 0% { opacity: 0; transform: scale(0.92) translateY(20px); } 60% { transform: scale(1.02) translateY(-5px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
         @keyframes smoothFadeIn { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
 
-        /* เมนูแนวนอนเลื่อนได้สมูทๆ แบบ Liquid Glass */
         .menu-container { 
             text-align: center; margin-bottom: 35px; max-width: 100vw; 
             overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; 
@@ -101,36 +97,39 @@
             border-radius: 999px; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); 
             font-family: 'Prompt', sans-serif; font-weight: 600;
         }
-        .btn-menu:hover { color: #1C1C1E; background: rgba(255,255,255,0.2); }
+        .btn-menu:hover { color: #1C1C1E; background: rgba(255,255,255,0.2); transform: translateY(-2px); }
         .btn-menu:active { transform: scale(0.95); }
-        .btn-menu.active { background: #FFFFFF; color: #007AFF; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+        .btn-menu.active { background: #FFFFFF; color: #007AFF; box-shadow: 0 4px 16px rgba(0,0,0,0.06); transform: scale(1.05); }
         
-        /* ปุ่มทั้งหมดเพิ่มความเด้งดึ๋ง */
         .btn-base {
             border: none; padding: 16px; border-radius: 22px; font-family: 'Prompt'; cursor: pointer; 
             font-size: 16px; font-weight: 600; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); width: 100%;
         }
-        .btn-base:active { transform: scale(0.94); }
+        .btn-base:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .btn-base:active:not(:disabled) { transform: scale(0.94) translateY(2px); }
+        .btn-base:disabled { opacity: 0.6; cursor: not-allowed; }
         
         .btn-solid-blue { background: #007AFF; color: white; box-shadow: 0 8px 24px rgba(0, 122, 255, 0.25); }
-        .btn-solid-blue:hover { background: #0066CC; box-shadow: 0 12px 28px rgba(0, 122, 255, 0.35); }
+        .btn-solid-blue:hover:not(:disabled) { background: #0066CC; box-shadow: 0 12px 28px rgba(0, 122, 255, 0.35); }
         
         .btn-solid-green { background: #34C759; color: white; box-shadow: 0 8px 24px rgba(52, 199, 89, 0.25); }
-        .btn-solid-green:hover { background: #2EAF4E; box-shadow: 0 12px 28px rgba(52, 199, 89, 0.35); }
+        .btn-solid-green:hover:not(:disabled) { background: #2EAF4E; box-shadow: 0 12px 28px rgba(52, 199, 89, 0.35); }
         
         .btn-solid-red { background: #FF3B30; color: white; box-shadow: 0 8px 24px rgba(255, 59, 48, 0.25); }
-        .btn-solid-red:hover { background: #E0352B; box-shadow: 0 12px 28px rgba(255, 59, 48, 0.35); }
+        .btn-solid-red:hover:not(:disabled) { background: #E0352B; box-shadow: 0 12px 28px rgba(255, 59, 48, 0.35); }
         
         .btn-solid-dark { background: #1C1C1E; color: white; box-shadow: 0 8px 24px rgba(28, 28, 30, 0.25); margin-top: 25px; }
-        .btn-solid-dark:hover { background: #000000; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35); }
+        .btn-solid-dark:hover:not(:disabled) { background: #000000; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35); }
         
         .btn-outline { background: rgba(255,255,255,0.3); border: 1px solid rgba(0,0,0,0.1); color: #1C1C1E; box-shadow: none; backdrop-filter: blur(10px); }
         .btn-outline:hover { background: rgba(255,255,255,0.6); }
 
         .btn-scan { background: #32ADE6; color: white; box-shadow: 0 8px 24px rgba(50, 173, 230, 0.25); border: none; padding: 16px; border-radius: 22px; font-family: 'Prompt'; font-weight:600; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); white-space: nowrap; }
+        .btn-scan:hover { transform: translateY(-2px) scale(1.02); }
         .btn-scan:active { transform: scale(0.92); }
         
         .btn-generate { background: #AF52DE; color: white; box-shadow: 0 8px 24px rgba(175, 82, 222, 0.25); border: none; padding: 16px; border-radius: 22px; font-family: 'Prompt'; font-weight:600; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); white-space: nowrap; }
+        .btn-generate:hover { transform: translateY(-2px) scale(1.02); }
         .btn-generate:active { transform: scale(0.92); }
 
         .barcode-group { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 20px;}
@@ -139,7 +138,6 @@
 
         label { font-weight: 600; margin-top: 15px; display: block; color: #1C1C1E; font-size: 14px; margin-bottom: 8px; text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
         
-        /* ช่องกรอกข้อมูลสไตล์กระจก */
         input, select {
             width: 100%; padding: 16px 20px; margin-bottom: 20px; 
             background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -153,23 +151,24 @@
 
         .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 24px; background: rgba(255,255,255,0.3); backdrop-filter: blur(10px); padding: 10px; border: 1px solid rgba(255,255,255,0.4); }
         table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; min-width: 800px; }
-        th, td { padding: 16px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.03); vertical-align: middle; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.03); vertical-align: middle; transition: 0.3s; }
         th { color: #5A5A5E; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
         tr:last-child td { border-bottom: none; }
-        tr:hover td { background-color: rgba(255,255,255,0.5); border-radius: 12px; }
-        .qty-badge { background: #E5F1FF; color: #007AFF; padding: 6px 16px; border-radius: 999px; font-weight: 600; display: inline-block; font-size: 14px; box-shadow: 0 2px 8px rgba(0,122,255,0.1); }
+        tr:hover td { background-color: rgba(255,255,255,0.5); border-radius: 12px; transform: scale(1.01); }
+        .qty-badge { background: #E5F1FF; color: #007AFF; padding: 6px 16px; border-radius: 999px; font-weight: 600; display: inline-block; font-size: 14px; box-shadow: 0 2px 8px rgba(0,122,255,0.1); transition: 0.3s; }
+        tr:hover .qty-badge { transform: scale(1.1); }
         .qty-badge.out-of-stock { background: #FFEBEE; color: #FF3B30; box-shadow: 0 2px 8px rgba(255,59,48,0.1); }
         .price-text { color: #34C759; font-weight: 600; }
-        .item-image { width: 64px; height: 64px; border-radius: 16px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background-color: #fff; }
+        .item-image { width: 64px; height: 64px; border-radius: 16px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background-color: #fff; transition: 0.3s; }
+        tr:hover .item-image { transform: scale(1.1) rotate(3deg); }
         
-        .btn-edit { background: rgba(0, 122, 255, 0.1); color: #007AFF; border: none; padding: 10px 20px; border-radius: 999px; cursor: pointer; font-family: 'Prompt'; font-weight: 600; transition: all 0.2s; }
-        .btn-edit:hover { background: #007AFF; color: white; transform: scale(1.05); }
+        .btn-edit { background: rgba(0, 122, 255, 0.1); color: #007AFF; border: none; padding: 10px 20px; border-radius: 999px; cursor: pointer; font-family: 'Prompt'; font-weight: 600; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .btn-edit:hover { background: #007AFF; color: white; transform: scale(1.05) translateY(-2px); box-shadow: 0 4px 10px rgba(0,122,255,0.2); }
         .btn-edit:active { transform: scale(0.95); }
 
-        .clickable-barcode { color: #007AFF; font-family: monospace; font-weight: bold; cursor: pointer; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.5); transition: 0.2s; border: 1px solid rgba(255,255,255,0.8); }
-        .clickable-barcode:hover { background: rgba(255,255,255,0.9); }
+        .clickable-barcode { color: #007AFF; font-family: monospace; font-weight: bold; cursor: pointer; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.5); transition: 0.2s; border: 1px solid rgba(255,255,255,0.8); display: inline-block; }
+        .clickable-barcode:hover { background: rgba(255,255,255,0.9); transform: scale(1.05); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 
-        /* Liquid Glass สำหรับ Dashboard Boxes */
         .dash-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
         .dash-box { 
             padding: 24px 20px; border-radius: 28px; text-align: center; 
@@ -181,17 +180,19 @@
         }
         .dash-box:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 16px 32px rgba(0,0,0,0.08); }
         .dash-box p { margin: 0; color: #5A5A5E; font-size: 14px; font-weight: 600; }
-        .dash-box span { font-size: 32px; font-weight: 700; display: block; margin-top: 10px; letter-spacing: -0.5px; }
+        .dash-box span { font-size: 32px; font-weight: 700; display: block; margin-top: 10px; letter-spacing: -0.5px; transition: 0.3s; }
+        .dash-box:hover span { transform: scale(1.1); }
         .color-blue { color: #007AFF; } .color-green { color: #34C759; } .color-red { color: #FF3B30; } .color-purple { color: #AF52DE; }
 
         .user-info { display: flex; justify-content: flex-end; align-items: center; max-width: 900px; margin: 0 auto 20px; padding: 0 20px; }
         .user-name { font-weight: 600; color: #1C1C1E; font-size: 14px; margin-right: 15px; background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.6); padding: 8px 16px; border-radius: 999px; backdrop-filter: blur(10px); }
-        .btn-logout { padding: 8px 20px; border-radius: 999px; border: none; background: rgba(255, 59, 48, 0.1); color: #FF3B30; cursor: pointer; font-family: 'Prompt'; font-weight: 600; transition: all 0.2s; }
-        .btn-logout:active { transform: scale(0.9); }
+        .btn-logout { padding: 8px 20px; border-radius: 999px; border: none; background: rgba(255, 59, 48, 0.1); color: #FF3B30; cursor: pointer; font-family: 'Prompt'; font-weight: 600; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .btn-logout:hover { background: #FF3B30; color: white; transform: translateY(-2px) scale(1.05); }
 
         .chart-wrapper { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 35px; }
-        .chart-container { width: 100%; max-width: 320px; height: 320px; }
-        .bar-chart-container { width: 100%; height: 380px; margin-top: 25px; }
+        .chart-container { width: 100%; max-width: 320px; height: 320px; transition: 0.3s; }
+        .chart-container:hover { transform: scale(1.05); }
+        .bar-chart-container { width: 100%; height: 380px; margin-top: 25px; transition: 0.3s; }
         .stock-chart-container { width: 100%; height: 350px; margin-top: 15px; background: rgba(255,255,255,0.4); border-radius: 28px; padding: 20px; box-sizing: border-box; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); }
 
         #status-text { text-align: center; color: #007AFF; font-weight: 600; height: 24px; margin-bottom: 20px; font-size: 14px; }
@@ -206,11 +207,11 @@
             pointer-events: auto;
             min-width: 200px; max-width: 90vw; padding: 14px 24px; border-radius: 999px;
             color: #1C1C1E; font-size: 14px; text-align: center; font-weight: 500;
-            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 100%); 
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%); 
             backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.8);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.8);
             border: 1px solid rgba(255,255,255,0.9);
-            animation: slideDownBouncy 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation: slideDownBouncy 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             display: flex; flex-direction: column; justify-content: center;
         }
         .toast strong { font-size: 15px; margin-bottom: 2px; display: block; }
@@ -219,16 +220,19 @@
         .toast-warning { color: #FF9500; } 
         .toast-info { color: #007AFF; } 
         .toast-danger { color: #FF3B30; }
+        .toast-success { color: #34C759; }
         
         @keyframes slideDownBouncy { 
-            0% { transform: translateY(-40px) scale(0.9); opacity: 0; } 
+            0% { transform: translateY(-50px) scale(0.8); opacity: 0; } 
+            50% { transform: translateY(15px) scale(1.05); opacity: 1; }
+            75% { transform: translateY(-5px) scale(0.98); opacity: 1; }
             100% { transform: translateY(0) scale(1); opacity: 1; } 
         }
 
         /* Modal ทรงเด้งดึ๋ง Liquid Glass */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.2); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.4); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(8px);
         }
         .modal-box { 
             background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 100%); 
@@ -252,16 +256,37 @@
         .preview-card h3 { margin: 0 0 5px 0; font-size: 18px; }
         .preview-card p { margin: 0; color: #5A5A5E; font-weight: 600; font-size: 14px; }
 
+        /* 🔥 CSS ระบบพิมพ์ที่แก้แล้ว 🔥 */
         .print-layout { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 25px; }
-        .print-item { background: rgba(255,255,255,0.6); padding: 20px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid rgba(255,255,255,0.6); backdrop-filter: blur(10px); }
+        .print-item-preview { background: rgba(255,255,255,0.6); padding: 20px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid rgba(255,255,255,0.6); backdrop-filter: blur(10px); overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;}
 
+        #print-area { display: none; }
         @media print {
-            body * { visibility: hidden; }
-            #barcode-modal, #barcode-modal .modal-box, #barcode-modal .modal-box * { visibility: visible; }
-            #barcode-modal { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: none; }
-            .modal-box { box-shadow: none; width: 100%; max-width: 100%; border: none; padding: 0; background: #fff; }
+            @page { size: A4 portrait; margin: 15mm; }
+            body { background: white; margin: 0; padding: 0; }
+            body * { visibility: hidden !important; }
+            #print-area, #print-area * { visibility: visible !important; }
+            #print-area { 
+                display: grid !important; 
+                grid-template-columns: 1fr 1fr; 
+                grid-auto-rows: calc((297mm - 30mm) / 3 - 5mm); 
+                gap: 5mm; 
+                position: absolute; 
+                left: 0; top: 0; width: 100%; 
+                background: white; 
+            }
+            .print-item { 
+                display: flex; flex-direction: column; justify-content: center; align-items: center; 
+                border: 1px dashed #ccc; padding: 10px; text-align: center; border-radius: 8px; 
+                break-inside: avoid; page-break-inside: avoid; 
+            }
+            .print-item:nth-child(6n):not(:last-child) { 
+                page-break-after: always; 
+                break-after: page; 
+            }
+            .print-name { font-size: 16px; font-weight: bold; margin-bottom: 5px; color: black; }
+            .print-lot { font-size: 12px; color: #555; margin-bottom: 10px; }
             .no-print { display: none !important; }
-            .print-item { border: none; background: #fff; box-shadow: none; }
         }
 
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -286,6 +311,25 @@
 
     <div id="toast-container"></div>
 
+    <div id="print-area"></div>
+
+    <!-- ปุ่มแจ้งเตือนกระดิ่ง -->
+    <div class="no-print" style="display: flex; justify-content: flex-end; gap: 10px; max-width: 900px; margin: 0 auto 10px;">
+        <button class="btn-base btn-outline" style="padding: 8px 16px; font-size: 13px; width: auto; border-radius: 999px; position: relative;" onclick="openNotificationModal()">
+            🔔 แจ้งเตือน 
+            <span id="noti-badge" style="background: #FF3B30; color: white; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: bold; position: absolute; top: -5px; right: -5px; display: none; box-shadow: 0 4px 10px rgba(255, 59, 48, 0.4);">0</span>
+        </button>
+    </div>
+
+    <!-- Modal แจ้งเตือนของเข้า-ออก -->
+    <div id="noti-modal" class="modal-overlay no-print">
+        <div class="modal-box" style="max-height: 80vh; overflow-y: auto;">
+            <h3 style="margin-top: 0;">🔔 ประวัติเข้า-ออกล่าสุด</h3>
+            <div id="noti-list" style="text-align: left; margin-top: 20px;"></div>
+            <button class="btn-base btn-outline" style="margin-top: 20px;" onclick="closeNotiModal()">ปิด</button>
+        </div>
+    </div>
+
     <!-- Modal เปิดกล้อง -->
     <div id="scanner-modal" class="modal-overlay">
         <div class="modal-box">
@@ -298,24 +342,39 @@
 
     <!-- Modal พิมพ์บาร์โค้ดและ QR Code -->
     <div id="barcode-modal" class="modal-overlay">
-        <div class="modal-box">
+        <div class="modal-box" style="max-width: 550px;">
             <h3 class="no-print" style="margin-top: 0; color: #007AFF;">รหัสสินค้า</h3>
             <p id="barcode-item-name" style="font-size: 18px; font-weight: 600; margin-bottom: 20px;"></p>
             
             <div class="print-layout">
-                <div class="print-item">
-                    <p style="margin: 0 0 10px 0; font-size: 12px; color: #5A5A5E;">สำหรับปืนยิงสต๊อก (EAN-13)</p>
-                    <svg id="barcode-canvas"></svg>
+                <div class="print-item-preview" style="flex: 1; min-width: 200px;">
+                    <p style="margin: 0 0 10px 0; font-size: 12px; color: #5A5A5E; align-self: flex-start;">ตัวอย่างบาร์โค้ด</p>
+                    <svg id="preview-barcode-canvas" style="max-width: 100%; height: auto; max-height: 80px;"></svg>
                 </div>
-                <div class="print-item">
-                    <p style="margin: 0 0 10px 0; font-size: 12px; color: #5A5A5E;">สแกนแอปมือถือเข้าเว็บ</p>
-                    <canvas id="qr-canvas"></canvas>
+                <div class="print-item-preview" style="flex: 1; min-width: 150px;">
+                    <p style="margin: 0 0 10px 0; font-size: 12px; color: #5A5A5E; align-self: flex-start;">สแกนแอปมือถือเข้าเว็บ</p>
+                    <canvas id="qr-canvas" style="max-width: 100%; height: auto; max-height: 90px;"></canvas>
                 </div>
             </div>
             
+            <p style="font-size: 13px; color: #5A5A5E; margin-bottom: 20px;">*ระบบจะพิมพ์บาร์โค้ด 6 ดวงลง 1 หน้ากระดาษ A4 อัตโนมัติ (QR Code จะไม่ถูกพิมพ์)</p>
+
             <div class="form-grid no-print">
                 <button class="btn-base btn-outline" onclick="closeBarcodePreview()">ปิด</button>
-                <button class="btn-base btn-solid-blue" onclick="window.print()">🖨️ พิมพ์</button>
+                <button class="btn-base btn-solid-blue" onclick="executeSinglePrint()">🖨️ พิมพ์ 6 ดวง</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal พิมพ์รวม (Batch Print) -->
+    <div id="batch-modal" class="modal-overlay no-print">
+        <div class="modal-box">
+            <h3 style="margin-top: 0;">พิมพ์รวมบาร์โค้ด</h3>
+            <p id="batch-modal-text" style="font-size: 15px; font-weight: 500; margin-bottom: 15px; color: var(--text-main);"></p>
+            <p style="font-size: 13px; color: #007AFF; margin-bottom: 25px; background: rgba(0, 122, 255, 0.1); padding: 10px; border-radius: 12px; border: 1px dashed #007AFF;">ระบบจะดึงสินค้าที่มีบาร์โค้ดทั้งหมด จัดเรียงหน้าละ 6 ดวงอัตโนมัติ</p>
+            <div class="form-grid">
+                <button class="btn-base btn-outline" onclick="closeBatchPreview()">ยกเลิก</button>
+                <button class="btn-base btn-solid-blue" onclick="executeBatchPrint()">🖨️ เริ่มพิมพ์</button>
             </div>
         </div>
     </div>
@@ -326,10 +385,15 @@
         <p>ระบบบริหารคลังสินค้าอัจฉริยะ</p>
     </div>
 
-    <!-- 🔒 เข้าสู่ระบบ -->
+    <!-- เข้าสู่ระบบ -->
     <div id="login-page" class="card active">
         <h2>เข้าสู่ระบบพนักงาน</h2>
         <p style="text-align: center; color: #5A5A5E; font-size: 14px; margin-bottom: 25px;">ยืนยันตัวตนเพื่อเข้าใช้งานระบบ</p>
+        
+        <div id="sync-status" style="text-align: center; color: #007AFF; font-size: 13px; font-weight: 600; margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.7); border-radius: 12px; display: none;">
+            กำลังเชื่อมต่อฐานข้อมูล...
+        </div>
+
         <label>ชื่อผู้ใช้งาน</label>
         <input type="text" id="login-user" placeholder="Username">
         <label>รหัสผ่าน</label>
@@ -338,7 +402,7 @@
         <div id="login-status" style="text-align: center; margin-top: 20px; font-size: 14px; font-weight: 500;"></div>
     </div>
 
-    <!-- 📦 หน้าจอหลัก -->
+    <!-- หน้าจอหลัก -->
     <div id="app-container" style="display: none;">
         
         <div class="user-info">
@@ -389,9 +453,10 @@
         <div id="receive" class="card">
             <h2>รับสินค้าเข้าคลัง</h2>
             
-            <label>รหัสบาร์โค้ด (ยิงเพื่อค้นหาของเดิม หรือสร้างใหม่)</label>
+            <label>รหัสบาร์โค้ด (ยิงหรือพิมพ์ปุ๊บ ข้อมูลจะเด้งอัตโนมัติ)</label>
             <div class="barcode-group">
-                <input type="text" id="in-barcode" placeholder="สแกนหรือพิมพ์บาร์โค้ด..." onkeypress="findItemForReceive(event)">
+                <!-- 🔥 แก้ตรงนี้: ถ้ากด Enter ให้เด้งไปช่องจำนวนเลย ไม่รีเฟรชหน้า 🔥 -->
+                <input type="text" id="in-barcode" placeholder="ยิงหรือพิมพ์..." oninput="autoFillBarcode(this.value, 'in')" onkeypress="if(event.key==='Enter') { event.preventDefault(); document.getElementById('in-qty').focus(); }">
                 <button class="btn-scan" onclick="startScanner('in-barcode')">📷 สแกน</button>
                 <button class="btn-generate" onclick="generateEAN13('in-barcode')">✨ สร้างรหัส</button>
             </div>
@@ -412,16 +477,17 @@
             </div>
             <label>ลิงก์รูปภาพ</label>
             <input type="text" id="in-image" placeholder="วางลิงก์รูปภาพ (Google Drive ก็ได้)">
-            <button class="btn-base btn-solid-green" style="margin-top: 10px;" onclick="receiveItem()">ยืนยันรับเข้า</button>
+            <button class="btn-base btn-solid-green" style="margin-top: 10px;" onclick="receiveItem(this)">ยืนยันรับเข้า</button>
         </div>
 
         <!-- Issue -->
         <div id="issue" class="card">
             <h2>เบิกสินค้าออก</h2>
             
-            <label>ยิงบาร์โค้ดเพื่อค้นหาด่วน</label>
+            <label>ยิงบาร์โค้ดเพื่อค้นหาด่วน (ข้อมูลจะเด้งอัตโนมัติ)</label>
             <div class="barcode-group">
-                <input type="text" id="out-barcode" placeholder="ยิงบาร์โค้ดตรงนี้..." onkeypress="findItemByBarcode(event)">
+                <!-- 🔥 แก้ตรงนี้: ถ้ากด Enter ให้เด้งไปช่องจำนวนเลย 🔥 -->
+                <input type="text" id="out-barcode" placeholder="ยิงบาร์โค้ดตรงนี้..." oninput="autoFillBarcode(this.value, 'out')" onkeypress="if(event.key==='Enter') { event.preventDefault(); document.getElementById('out-qty').focus(); }">
                 <button class="btn-scan" onclick="startScanner('out-barcode')">📷 สแกน</button>
             </div>
 
@@ -432,11 +498,12 @@
             </div>
 
             <label>หรือค้นหาจากรายชื่อ</label>
-            <select id="out-item"><option>กำลังโหลดข้อมูล...</option></select> 
+            <!-- 🔥 แก้ตรงนี้: ใส่ onchange เพื่อให้ดึงรูปตอนกดเลือกจาก Dropdown 🔥 -->
+            <select id="out-item" onchange="updateIssuePreviewFromSelect()"><option value="">-- แตะเลือกรายการ --</option></select> 
             
             <label>จำนวนที่จะเบิก <span style="color:#FF3B30;">*</span></label>
             <input type="number" id="out-qty" placeholder="ระบุตัวเลข">
-            <button class="btn-base btn-solid-red" style="margin-top: 10px;" onclick="issueItem()">ยืนยันเบิกออก</button>
+            <button class="btn-base btn-solid-red" style="margin-top: 10px;" onclick="issueItem(this)">ยืนยันเบิกออก</button>
         </div>
 
         <!-- Stock -->
@@ -448,7 +515,10 @@
                     <label style="margin-top: 0;">ค้นหาสินค้าด่วน</label>
                     <input type="text" id="search-stock" placeholder="🔍 พิมพ์ชื่อ, ล็อต หรือบาร์โค้ด..." onkeyup="filterStock()" style="margin-bottom: 0;">
                 </div>
-                <div><button class="btn-base btn-solid-green" style="margin-bottom: 0;" onclick="exportStockCSV()">📥 โหลด CSV</button></div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-base btn-solid-blue" style="margin-bottom: 0;" onclick="openBatchPreview()">🖨️ พิมพ์รวม</button>
+                    <button class="btn-base btn-solid-green" style="margin-bottom: 0;" onclick="exportStockCSV()">📥 CSV</button>
+                </div>
             </div>
 
             <div class="table-responsive">
@@ -469,7 +539,7 @@
             </div>
         </div>
 
-        <!-- ⚙️ Settings -->
+        <!-- Settings -->
         <div id="settings" class="card">
             <h2>ตั้งค่าระบบ</h2>
             
@@ -479,7 +549,7 @@
             <p style="text-align: center; font-size: 14px; color: #5A5A5E; margin-top: 10px;">พรีวิวโลโก้</p>
             <img id="setting-logo-preview" src="" style="max-width: 200px; max-height: 120px; border-radius: 24px; display: block; margin: 0 auto 25px auto; object-fit: contain; background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.6); padding: 10px;" onerror="this.style.display='none'">
             
-            <button class="btn-base btn-solid-blue" onclick="saveLogoSetting()">บันทึกโลโก้</button>
+            <button class="btn-base btn-solid-blue" onclick="saveLogoSetting(this)">บันทึกโลโก้</button>
         </div>
 
         <!-- Edit Item -->
@@ -505,7 +575,7 @@
             <input type="text" id="edit-image">
             <div class="form-grid" style="margin-top: 20px;">
                 <button class="btn-base btn-outline" onclick="showPage('stock', document.querySelectorAll('.btn-menu')[4])">ยกเลิก</button>
-                <button class="btn-base btn-solid-blue" onclick="saveEditItem()">บันทึก</button>
+                <button class="btn-base btn-solid-blue" onclick="saveEditItem(this)">บันทึก</button>
             </div>
         </div>
 
@@ -523,8 +593,12 @@
     </div>
 
     <script>
+        // ลิงก์ API ของระบบ Kakao CSE
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGyKL-ps7NvHF7cKRTCPm4IVzWOol0k83xNHT9YSM-OtHCwli129prCPL2wE981Hce/exec';
         const BASE_WEBSITE_URL = window.location.href.split('?')[0];
+
+        // Webhook Discord อัปเดตใหม่
+        const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1555804035901169664/h626Y47MYR-vo8ZRTib-b9qIHDFCfdmycyVwgIgNyUAKSG2PFwrImKnTLlWqa_WktiG5';
 
         let inventory = []; 
         let todayLogs = [];
@@ -539,24 +613,81 @@
 
         let html5QrCode = null; 
         let currentScanInputId = ""; 
-        let externalBarcodeHandled = false; 
+        let isDataSynced = false;
 
         Chart.defaults.font.family = "'Prompt', sans-serif";
         Chart.defaults.color = '#5A5A5E';
 
+        // 🚀 ส่งแจ้งเตือนเข้า Discord
+        async function sendDiscordWebhook(action, name, qty) {
+            if (!DISCORD_WEBHOOK_URL) return;
+            
+            let color = action === 'IN' ? 345889 : 16726832; 
+            let actionText = action === 'IN' ? '📥 แจ้งเตือน: รับสินค้าเข้าคลัง' : '📤 แจ้งเตือน: เบิกสินค้าออกจากคลัง';
+            
+            let payload = {
+                embeds: [{
+                    title: actionText,
+                    description: `**รายการ:** ${name}\n**จำนวน:** ${qty} ชิ้น\n**ผู้ทำรายการ:** ${loggedInUser || 'ไม่ระบุ'}`,
+                    color: color,
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            try {
+                await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch(e) { console.error("Discord Webhook Error:", e); }
+        }
+
+        function applyDataToUI(data) {
+            if (!data) return;
+            if (data.logo) {
+                let formattedLogo = formatImageUrl(data.logo);
+                let mainLogo = document.getElementById('main-company-logo');
+                let previewLogo = document.getElementById('setting-logo-preview');
+                let urlLogo = document.getElementById('setting-logo-url');
+                if(mainLogo) mainLogo.src = formattedLogo;
+                if(previewLogo) { previewLogo.src = formattedLogo; previewLogo.style.display = 'block'; }
+                if(urlLogo) urlLogo.value = data.logo;
+            }
+            inventory = data.stock || []; 
+            todayLogs = data.logs || [];
+            totalIn = data.in || 0; 
+            totalOut = data.out || 0; 
+            
+            updateNotiBadge(); 
+            
+            if (document.getElementById('app-container').style.display === 'block') {
+                updateDashboard(); updateStockTable(); updateIssueDropdown(); updateDailyBarChart(); checkLowStockAlerts();
+            }
+        }
+
         window.onload = async function() {
+            let cachedData = localStorage.getItem('kakao_inventory_cache');
+            if (cachedData) {
+                try {
+                    let parsedData = JSON.parse(cachedData);
+                    applyDataToUI(parsedData);
+                    isDataSynced = true;
+                } catch(e) {}
+            }
+
             try {
                 let res = await fetch(SCRIPT_URL + "?action=getLogo");
-                if(!res.ok) throw new Error("Fetch error");
-                let text = await res.text();
-                let data = JSON.parse(text);
-                
-                if (data.logo) {
-                    let formattedLogo = formatImageUrl(data.logo);
-                    document.getElementById('main-company-logo').src = formattedLogo;
-                    document.getElementById('setting-logo-preview').src = formattedLogo;
-                    document.getElementById('setting-logo-preview').style.display = 'block';
-                    document.getElementById('setting-logo-url').value = data.logo;
+                if(res.ok) {
+                    let text = await res.text();
+                    let data = JSON.parse(text);
+                    if (data.logo) {
+                        let formattedLogo = formatImageUrl(data.logo);
+                        document.getElementById('main-company-logo').src = formattedLogo;
+                        document.getElementById('setting-logo-preview').src = formattedLogo;
+                        document.getElementById('setting-logo-preview').style.display = 'block';
+                        document.getElementById('setting-logo-url').value = data.logo;
+                    }
                 }
             } catch(e) {}
         };
@@ -567,20 +698,66 @@
             const toast = document.createElement('div');
             
             let displayMsg = message;
-            if(message.length > 50) {
-                displayMsg = message.substring(0, 50) + '... (กดเพื่อดู)';
-            }
+            if(message.length > 50) displayMsg = message.substring(0, 50) + '... (กดเพื่อดู)';
             
             toast.className = `toast`;
             toast.innerHTML = `<strong class="toast-${type}">${title}</strong><span>${displayMsg}</span>`;
             
-            if(message.length > 50) {
-                toast.onclick = () => alert(title + "\n\n" + message); 
-            }
+            if(message.length > 50) toast.onclick = () => alert(title + "\n\n" + message); 
             
             container.appendChild(toast);
             setTimeout(() => { if (container.contains(toast)) toast.remove(); }, 4000);
         }
+
+        function bounceBadge() {
+            let badge = document.getElementById('noti-badge');
+            badge.style.animation = 'none';
+            badge.offsetHeight; 
+            badge.style.animation = 'scaleInBouncy 0.5s ease-out';
+        }
+
+        function updateNotiBadge() {
+            let badge = document.getElementById('noti-badge');
+            if(!badge) return;
+            let realLogs = todayLogs.filter(log => log.type === 'IN' || log.type === 'OUT');
+            if(realLogs.length > 0) {
+                badge.innerText = realLogs.length;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function openNotificationModal() {
+            let listEl = document.getElementById('noti-list');
+            listEl.innerHTML = '';
+            
+            let realLogs = todayLogs.filter(log => log.type === 'IN' || log.type === 'OUT');
+            
+            if(realLogs.length > 0) {
+                let reversedLogs = [...realLogs].reverse().slice(0, 20); 
+                reversedLogs.forEach(log => {
+                    let color = log.type === 'IN' ? '#34C759' : '#FF3B30';
+                    let bg = log.type === 'IN' ? 'rgba(52, 199, 89, 0.1)' : 'rgba(255, 59, 48, 0.1)';
+                    let icon = log.type === 'IN' ? '📥 รับเข้า' : '📤 เบิกออก';
+                    
+                    listEl.innerHTML += `
+                        <div style="background: ${bg}; padding: 15px; border-radius: 16px; margin-bottom: 10px; border-left: 5px solid ${color};">
+                            <div style="font-weight: 600; font-size: 15px; color: #1C1C1E;">${icon} : ${log.name}</div>
+                            <div style="font-size: 13px; color: #5A5A5E; display: flex; justify-content: space-between; margin-top: 8px;">
+                                <span>จำนวน: <strong style="color: ${color}; font-size:15px;">${log.qty}</strong> ชิ้น</span>
+                                <span><i style="opacity:0.7;">ล่าสุดวันนี้</i></span>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                listEl.innerHTML = '<div style="text-align:center; color:#5A5A5E; padding:30px; background:rgba(255,255,255,0.5); border-radius:15px;">ยังไม่มีการเคลื่อนไหวสินค้าในวันนี้ 😴</div>';
+            }
+            document.getElementById('noti-modal').style.display = 'flex';
+        }
+
+        function closeNotiModal() { document.getElementById('noti-modal').style.display = 'none'; }
 
         function generateEAN13(inputId) {
             let code = "885"; 
@@ -590,23 +767,81 @@
             let checkDigit = (10 - (sum % 10)) % 10;
             let finalEAN = code + checkDigit;
             
-            document.getElementById(inputId).value = finalEAN;
+            let inputField = document.getElementById(inputId);
+            inputField.value = finalEAN;
             showNotification('สร้างรหัสสำเร็จ', `รหัส EAN-13: ${finalEAN}`, 'info');
+
+            let mode = inputId.includes('in') ? 'in' : 'out';
+            autoFillBarcode(finalEAN, mode);
+        }
+
+        function drawBarcodeSafe(selector, value, widthEAN=1.8, heightEAN=50, fontSize=14) {
+            try { 
+                JsBarcode(selector, value, { format: "EAN13", width: widthEAN, height: heightEAN, displayValue: true, fontSize: fontSize, background: "transparent", lineColor: "currentColor", margin: 5 }); 
+            } catch(e) { 
+                try { 
+                    JsBarcode(selector, value, { format: "CODE128", width: widthEAN-0.3, height: heightEAN-10, displayValue: true, fontSize: fontSize-2, background: "transparent", lineColor: "currentColor", margin: 5 }); 
+                } catch(err) { console.log("วาดบาร์โค้ดไม่ได้:", value); } 
+            }
         }
 
         function openBarcodePreview(barcodeText, itemName) {
             if(!barcodeText || barcodeText === '-') {
                 showNotification('ไม่มีรหัส', 'สินค้านี้ยังไม่ได้บันทึกบาร์โค้ด', 'warning'); return;
             }
+            currentPrintBarcode = barcodeText; 
+            currentPrintName = itemName;
             document.getElementById('barcode-item-name').innerText = itemName;
             document.getElementById('barcode-modal').style.display = 'flex';
-            try { JsBarcode("#barcode-canvas", barcodeText, { format: "EAN13", lineColor: "#000", width: 2.5, height: 70, displayValue: true, fontSize: 18, fontOptions: "bold", margin: 10 }); } 
-            catch(e) { JsBarcode("#barcode-canvas", barcodeText, { format: "CODE128", width: 2, height: 60, displayValue: true }); }
+            
+            drawBarcodeSafe("#preview-barcode-canvas", barcodeText, 2.5, 70, 18);
+            
             let qrCanvas = document.getElementById("qr-canvas");
             new QRious({ element: qrCanvas, value: BASE_WEBSITE_URL + "?barcode=" + barcodeText, size: 140, background: 'white', foreground: 'black' });
         }
 
         function closeBarcodePreview() { document.getElementById('barcode-modal').style.display = 'none'; }
+
+        function executeSinglePrint() {
+            const printArea = document.getElementById('print-area');
+            if(!printArea) return;
+            printArea.innerHTML = '';
+            for(let i=0; i<6; i++) {
+                printArea.innerHTML += `<div class="print-item"><div class="print-name">${currentPrintName}</div><svg id="print-svg-single-${i}"></svg></div>`;
+            }
+            for(let i=0; i<6; i++) {
+                drawBarcodeSafe(`#print-svg-single-${i}`, currentPrintBarcode, 1.8, 50, 14);
+            }
+            closeBarcodePreview(); 
+            window.print();
+        }
+
+        function openBatchPreview() {
+            const itemsToPrint = inventory.filter(item => item.barcode && item.barcode !== '-');
+            if(itemsToPrint.length === 0) { showNotification('ไม่มีข้อมูล', 'ไม่มีสินค้าที่มีบาร์โค้ดในคลังเลย', 'warning'); return; }
+            let modalText = document.getElementById('batch-modal-text');
+            if(modalText) modalText.innerText = `พบสินค้ามีบาร์โค้ดทั้งหมด ${itemsToPrint.length} รายการ`;
+            
+            document.getElementById('batch-modal').style.display = 'flex';
+        }
+
+        function executeBatchPrint() {
+            const itemsToPrint = inventory.filter(item => item.barcode && item.barcode !== '-');
+            const printArea = document.getElementById('print-area');
+            if(!printArea) return;
+            printArea.innerHTML = '';
+            itemsToPrint.forEach((item, i) => {
+                let priceStr = item.price ? item.price.toLocaleString() : '0';
+                printArea.innerHTML += `<div class="print-item"><div class="print-name">${item.name}</div><div class="print-lot">Lot: ${item.lot || '-'} | ฿${priceStr}</div><svg id="print-svg-batch-${i}"></svg></div>`;
+            });
+            itemsToPrint.forEach((item, i) => {
+                drawBarcodeSafe(`#print-svg-batch-${i}`, item.barcode, 1.8, 50, 14);
+            });
+            closeBatchPreview(); 
+            window.print();
+        }
+        
+        function closeBatchPreview() { document.getElementById('batch-modal').style.display = 'none'; }
 
         function startScanner(inputId) {
             currentScanInputId = inputId; 
@@ -620,8 +855,9 @@
                     document.getElementById(currentScanInputId).value = decodedText;
                     closeScanner();
                     showNotification('สแกนสำเร็จ', `รหัส: ${decodedText}`, 'info');
-                    if(currentScanInputId === 'out-barcode') findItemByBarcode("camera");
-                    if(currentScanInputId === 'in-barcode') findItemForReceive("camera");
+                    
+                    if(currentScanInputId === 'out-barcode') autoFillBarcode(decodedText, 'out');
+                    if(currentScanInputId === 'in-barcode') autoFillBarcode(decodedText, 'in');
                 },
                 (err) => {}
             ).catch(() => { showNotification("ขัดข้อง", "ไม่สามารถเปิดกล้องได้ โปรดเช็คสิทธิ์บนมือถือ", "danger"); });
@@ -634,64 +870,65 @@
             }
         }
 
-        function findItemByBarcode(event) {
-            if (event.key === "Enter" || event === "camera" || event === "url") {
-                if(event.key === "Enter") event.preventDefault();
-                let barcodeVal = document.getElementById('out-barcode').value.trim().toLowerCase();
-                if(!barcodeVal) return;
-                
-                let foundIndex = inventory.findIndex(item => item.barcode && item.barcode.toLowerCase() === barcodeVal);
-                let previewContainer = document.getElementById('out-preview-container');
-                
-                if(foundIndex !== -1) {
-                    let item = inventory[foundIndex];
-                    document.getElementById('out-item').value = foundIndex;
-                    document.getElementById('out-preview-img').src = formatImageUrl(item.image) || 'https://via.placeholder.com/150?text=No+Image';
-                    document.getElementById('out-preview-name').innerText = item.name;
-                    document.getElementById('out-preview-stock').innerText = `คงเหลือ: ${item.qty} ชิ้น`;
-                    previewContainer.style.display = 'block';
-                    
-                    if (item.qty > 0) {
-                        showNotification('พบสินค้า', `เตรียมเบิก ${item.name}`, 'info');
-                        document.getElementById('out-qty').focus(); 
-                    } else { 
-                        showNotification('สินค้าหมด!', `${item.name} หมดสต๊อกแล้ว`, 'danger'); 
-                    }
-                } else { 
-                    previewContainer.style.display = 'none';
-                    showNotification('ไม่พบข้อมูล', 'ไม่พบรหัสนี้ในระบบ', 'warning'); 
-                }
+        // 🔥 แก้ไขโค้ดดึงข้อมูลให้สมบูรณ์ ดึงมาโชว์ครบทั้งรูป สต๊อก และ ราคา! 🔥
+        function autoFillBarcode(val, mode) {
+            let barcodeVal = String(val).trim().toLowerCase();
+            let previewContainer = document.getElementById(`${mode}-preview-container`);
+            
+            if(!barcodeVal) {
+                previewContainer.style.display = 'none';
+                if(mode === 'out') document.getElementById('out-item').value = ""; 
+                return;
             }
-        }
 
-        function findItemForReceive(event) {
-            if (event.key === "Enter" || event === "camera") {
-                if(event.key === "Enter") event.preventDefault();
-                let barcodeVal = document.getElementById('in-barcode').value.trim().toLowerCase();
-                if(!barcodeVal) { document.getElementById('in-qty').focus(); return; }
-                
-                let foundIndex = inventory.findIndex(item => item.barcode && item.barcode.toLowerCase() === barcodeVal);
-                let previewContainer = document.getElementById('in-preview-container');
-                
+            let foundIndex = inventory.findIndex(item => item.barcode && String(item.barcode).toLowerCase() === barcodeVal);
+
+            if (mode === 'in') {
                 if(foundIndex !== -1) {
                     let item = inventory[foundIndex];
-                    document.getElementById('in-name').value = item.name;
-                    document.getElementById('in-lot').value = item.lot;
-                    document.getElementById('in-price').value = item.price;
+                    document.getElementById('in-name').value = item.name || '';
+                    document.getElementById('in-lot').value = item.lot || '';
+                    document.getElementById('in-price').value = item.price || 0;
                     document.getElementById('in-image').value = item.image || '';
                     
                     document.getElementById('in-preview-img').src = formatImageUrl(item.image) || 'https://via.placeholder.com/150?text=No+Image';
                     document.getElementById('in-preview-name').innerText = item.name;
-                    document.getElementById('in-preview-stock').innerText = `มีของอยู่แล้ว: ${item.qty} ชิ้น`;
+                    document.getElementById('in-preview-stock').innerText = `มีของอยู่แล้ว: ${item.qty} ชิ้น | ราคา: ฿${(item.price||0).toLocaleString()}`;
                     previewContainer.style.display = 'block';
-                    
-                    showNotification('ดึงข้อมูลสำเร็จ', `ใส่จำนวนเข้าใหม่ได้เลย`, 'info');
-                    document.getElementById('in-qty').focus();
                 } else {
                     previewContainer.style.display = 'none';
-                    document.getElementById('in-name').value = '';
-                    document.getElementById('in-qty').focus();
                 }
+            } else if (mode === 'out') {
+                if(foundIndex !== -1) {
+                    let item = inventory[foundIndex];
+                    document.getElementById('out-item').value = foundIndex;
+                    
+                    document.getElementById('out-preview-img').src = formatImageUrl(item.image) || 'https://via.placeholder.com/150?text=No+Image';
+                    document.getElementById('out-preview-name').innerText = item.name;
+                    document.getElementById('out-preview-stock').innerText = `คงเหลือ: ${item.qty} ชิ้น | ราคา: ฿${(item.price||0).toLocaleString()}`;
+                    previewContainer.style.display = 'block';
+                } else {
+                    document.getElementById('out-item').value = "";
+                    previewContainer.style.display = 'none';
+                }
+            }
+        }
+
+        // 🔥 ฟังก์ชันใหม่: ดึงรูปและข้อมูลมาโชว์เวลาเลือกจาก Dropdown เบิกของ 🔥
+        function updateIssuePreviewFromSelect() {
+            let select = document.getElementById('out-item');
+            let previewContainer = document.getElementById('out-preview-container');
+            
+            if(select.value !== "") {
+                let item = inventory[parseInt(select.value)];
+                document.getElementById('out-barcode').value = item.barcode && item.barcode !== '-' ? item.barcode : '';
+                document.getElementById('out-preview-img').src = formatImageUrl(item.image) || 'https://via.placeholder.com/150?text=No+Image';
+                document.getElementById('out-preview-name').innerText = item.name;
+                document.getElementById('out-preview-stock').innerText = `คงเหลือ: ${item.qty} ชิ้น | ราคา: ฿${(item.price||0).toLocaleString()}`;
+                previewContainer.style.display = 'block';
+            } else {
+                previewContainer.style.display = 'none';
+                document.getElementById('out-barcode').value = '';
             }
         }
 
@@ -728,7 +965,12 @@
                     document.getElementById('login-page').classList.remove('active');
                     document.getElementById('app-container').style.display = "block";
                     showPage('dashboard', document.querySelector('.btn-menu'));
-                    fetchStockData(); 
+                    
+                    if(isDataSynced) {
+                        updateDashboard(); updateStockTable(); updateIssueDropdown(); updateDailyBarChart(); checkLowStockAlerts();
+                    } else {
+                        fetchStockDataBackground(); 
+                    }
                 } else {
                     statusDiv.innerText = "ข้อมูลไม่ถูกต้อง"; statusDiv.style.color = "#FF3B30";
                 }
@@ -746,6 +988,17 @@
             document.getElementById('login-page').classList.add('active');
         }
 
+        async function fetchStockDataBackground() {
+            try {
+                let response = await fetch(SCRIPT_URL + "?action=get");
+                if(response.ok) {
+                    let data = await response.json();
+                    localStorage.setItem('kakao_inventory_cache', JSON.stringify(data)); 
+                    applyDataToUI(data);
+                }
+            } catch (error) { console.log("Background sync failed"); }
+        }
+
         async function fetchStockData() {
             let statusEl = document.getElementById('status-text');
             statusEl.innerText = "กำลังซิงค์ข้อมูล...";
@@ -754,48 +1007,13 @@
             try {
                 let response = await fetch(SCRIPT_URL + "?action=get");
                 if(!response.ok) throw new Error("Net error");
+                let data = await response.json();
                 
-                let text = await response.text();
-                let data;
-                
-                try { 
-                    data = JSON.parse(text); 
-                } catch(e) { 
-                    console.error("Return is not JSON:", text);
-                    throw new Error("DeployPermissionError"); 
-                }
-                
-                inventory = data.stock; todayLogs = data.logs || [];
-                totalIn = data.in; totalOut = data.out;
-                
-                if (data.logo) {
-                    currentCompanyLogo = formatImageUrl(data.logo);
-                    document.getElementById('main-company-logo').src = currentCompanyLogo;
-                    document.getElementById('setting-logo-preview').src = currentCompanyLogo;
-                    document.getElementById('setting-logo-preview').style.display = 'block';
-                    document.getElementById('setting-logo-url').value = data.logo;
-                }
-                
-                updateDashboard(); updateStockTable(); updateIssueDropdown(); updateDailyBarChart(); checkLowStockAlerts();
+                localStorage.setItem('kakao_inventory_cache', JSON.stringify(data)); 
+                applyDataToUI(data);
                 statusEl.innerText = "";
-
-                if (!externalBarcodeHandled) {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const barcodeFromUrl = urlParams.get('barcode');
-                    if (barcodeFromUrl) {
-                        externalBarcodeHandled = true; 
-                        showPage('issue', document.querySelectorAll('.btn-menu')[3]);
-                        document.getElementById('out-barcode').value = barcodeFromUrl;
-                        findItemByBarcode("url"); 
-                    }
-                }
             } catch (error) {
-                console.error(error);
-                if(error.message === "DeployPermissionError") {
-                    statusEl.innerText = "ขัดข้อง: ไม่สามารถเชื่อมต่อฐานข้อมูลได้ (โปรดเช็คสิทธิ์ Deploy เป็น 'Anyone')";
-                } else {
-                    statusEl.innerText = "ขัดข้อง: เครือข่ายมีปัญหาหรือไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้";
-                }
+                statusEl.innerText = "ขัดข้อง: เครือข่ายมีปัญหาหรือไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้";
                 statusEl.style.color = "#FF3B30";
             }
         }
@@ -813,7 +1031,7 @@
             if (pageId === 'stock') { document.getElementById('search-stock').value = ""; filterStock(); }
             if (pageId === 'dashboard') updateDashboard(); 
             
-            closeScanner(); closeBarcodePreview();
+            closeScanner(); closeBarcodePreview(); closeNotiModal();
             document.getElementById('in-preview-container').style.display = 'none';
             document.getElementById('out-preview-container').style.display = 'none';
         }
@@ -826,7 +1044,7 @@
             return cleanUrl;
         }
 
-        async function receiveItem() {
+        async function receiveItem(btnElement) {
             const barcode = document.getElementById('in-barcode').value.trim();
             const name = document.getElementById('in-name').value;
             const lot = document.getElementById('in-lot').value;
@@ -836,51 +1054,108 @@
 
             if (!name || isNaN(qty) || qty <= 0) { showNotification("กรอกไม่ครบ", "กรุณาระบุชื่อและจำนวนที่ถูกต้อง", "danger"); return; }
 
-            document.getElementById('status-text').innerText = "กำลังบันทึก...";
-            let payload = { action: 'receive', barcode, name, lot, qty, price, user: loggedInUser, image: imageStr };
+            if (btnElement.disabled) return;
+            btnElement.disabled = true;
 
-            try {
-                let response = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
-                let result = await response.json();
-                if (result.status === 'success') {
-                    showNotification('เรียบร้อย', `รับของเข้า ${name} แล้ว`, 'info');
-                    ['in-barcode', 'in-name', 'in-lot', 'in-qty', 'in-price', 'in-image'].forEach(id => document.getElementById(id).value = '');
-                    document.getElementById('in-preview-container').style.display = 'none';
-                    fetchStockData(); 
-                }
-            } catch (error) { showNotification("พลาด", "บันทึกไม่ได้", "danger"); }
+            showNotification('กำลังประมวลผล', `รับ ${name} เข้าสู่คลัง ${qty} ชิ้น`, 'info');
+            
+            todayLogs.push({ type: 'IN', name: name, qty: qty });
+            totalIn += qty;
+            updateNotiBadge();
+            bounceBadge();
+
+            let foundIndex = inventory.findIndex(i => (barcode && i.barcode === barcode) || i.name === name);
+            if (foundIndex !== -1) {
+                inventory[foundIndex].qty += qty;
+                if(price > 0) inventory[foundIndex].price = price;
+                if(imageStr) inventory[foundIndex].image = imageStr;
+                if(lot) inventory[foundIndex].lot = lot;
+            } else {
+                inventory.push({ barcode, name, lot, qty, price, image: imageStr });
+            }
+
+            ['in-barcode', 'in-name', 'in-lot', 'in-qty', 'in-price', 'in-image'].forEach(id => document.getElementById(id).value = '');
+            document.getElementById('in-preview-container').style.display = 'none';
+
+            updateDashboard(); updateStockTable();
+
+            let payload = { action: 'receive', barcode, name, lot, qty, price, user: loggedInUser, image: imageStr };
+            
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        showNotification('สำเร็จ', `รับของเข้า ${name} เรียบร้อย!`, 'success');
+                        sendDiscordWebhook('IN', name, qty);
+                        fetchStockDataBackground(); 
+                    }
+                }).catch(e => console.log(e));
+
+            setTimeout(() => { btnElement.disabled = false; document.getElementById('in-barcode').focus(); }, 300);
         }
 
+        // 🔥 แก้ให้ Dropdown ตัวแรกมี value ว่าง 🔥
         function updateIssueDropdown() {
             const select = document.getElementById('out-item');
             select.innerHTML = '<option value="">-- แตะเลือกรายการ --</option>';
             inventory.forEach((item, index) => {
-                if (item.qty > 0) select.innerHTML += `<option value="${index}">[ล็อต: ${item.lot}] ${item.name} (เหลือ ${item.qty})</option>`;
+                if (item.qty > 0) select.innerHTML += `<option value="${index}">[ล็อต: ${item.lot||'-'}] ${item.name} (เหลือ ${item.qty})</option>`;
             });
         }
 
-        async function issueItem() {
-            const index = document.getElementById('out-item').value;
-            const issueQty = parseInt(document.getElementById('out-qty').value);
+        async function issueItem(btnElement) {
+            let outBarcodeEl = document.getElementById('out-barcode');
+            let outItemEl = document.getElementById('out-item');
+            
+            let barcodeVal = outBarcodeEl ? outBarcodeEl.value.trim().toLowerCase() : ""; 
+            let index = "";
 
-            if (index === "" || isNaN(issueQty) || issueQty <= 0) { showNotification("กรอกผิด", "เลือกรายการและใส่จำนวนให้ถูก", "danger"); return; }
+            if (barcodeVal) {
+                index = inventory.findIndex(item => item.barcode && String(item.barcode).toLowerCase() === barcodeVal);
+            } else if (outItemEl && outItemEl.value !== "") {
+                index = parseInt(outItemEl.value);
+            }
+
+            if (index === "" || index === -1) { showNotification("แจ้งเตือน", "ไม่พบสินค้า หรือยังไม่ได้เลือกรายการ", "warning"); return; }
+
+            const issueQty = parseInt(document.getElementById('out-qty').value);
+            if (isNaN(issueQty) || issueQty <= 0) { showNotification("กรอกผิด", "กรุณาใส่จำนวนที่จะเบิกให้ถูกต้อง", "danger"); return; }
 
             let item = inventory[index];
             if (issueQty > item.qty) { showNotification("ของไม่พอ", "จำนวนสต๊อกไม่พอเบิก", "danger"); return; }
 
-            document.getElementById('status-text').innerText = "กำลังเบิกออก...";
+            if (btnElement.disabled) return;
+            btnElement.disabled = true;
+
+            showNotification('กำลังประมวลผล', `เบิก ${item.name} ออก ${issueQty} ชิ้น...`, 'info');
+            
+            todayLogs.push({ type: 'OUT', name: item.name, qty: issueQty });
+            totalOut += issueQty;
+            updateNotiBadge();
+            bounceBadge();
+
+            inventory[index].qty -= issueQty;
+
+            document.getElementById('out-barcode').value = ''; 
+            document.getElementById('out-qty').value = ''; 
+            document.getElementById('out-item').value = '';
+            document.getElementById('out-preview-container').style.display = 'none';
+
+            updateDashboard(); updateStockTable(); updateIssueDropdown();
+
             let payload = { action: 'issue', name: item.name, lot: item.lot, qty: issueQty, user: loggedInUser };
             
-            try {
-                let response = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
-                let result = await response.json();
-                if (result.status === 'success') {
-                    showNotification('เบิกสำเร็จ', `เบิก ${item.name} แล้ว`, 'info');
-                    document.getElementById('out-barcode').value = ''; document.getElementById('out-qty').value = ''; 
-                    document.getElementById('out-preview-container').style.display = 'none';
-                    fetchStockData(); 
-                }
-            } catch (error) { showNotification("พลาด", "บันทึกไม่ได้", "danger"); }
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        showNotification('สำเร็จ', `ตัดสต๊อก ${item.name} ออก ${issueQty} ชิ้นเรียบร้อย!`, 'success');
+                        sendDiscordWebhook('OUT', item.name, issueQty);
+                        fetchStockDataBackground(); 
+                    }
+                }).catch(e => console.log(e));
+
+            setTimeout(() => { btnElement.disabled = false; document.getElementById('out-barcode').focus(); }, 300);
         }
 
         function openEditItem(index) {
@@ -898,7 +1173,7 @@
             showPage('edit-item-page', null);
         }
 
-        async function saveEditItem() {
+        async function saveEditItem(btnElement) {
             let payload = {
                 action: 'edit', user: loggedInUser, oldName: currentEditOldName, oldLot: currentEditOldLot,
                 newBarcode: document.getElementById('edit-barcode').value,
@@ -911,16 +1186,24 @@
 
             if(!payload.newName || isNaN(payload.newQty) || payload.newQty < 0) { showNotification("กรอกผิด", "เช็คข้อมูลอีกรอบ", "danger"); return; }
 
+            if (btnElement.disabled) return;
+            btnElement.disabled = true;
             document.getElementById('status-text').innerText = "อัปเดตข้อมูล...";
+
             try {
                 let response = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
                 let result = await response.json();
                 if (result.status === 'success') {
-                    showNotification('แก้ไขสำเร็จ', `บันทึกข้อมูลใหม่แล้ว`, 'info');
+                    showNotification('แก้ไขสำเร็จ', `บันทึกข้อมูลใหม่แล้ว`, 'success');
                     showPage('stock', document.querySelectorAll('.btn-menu')[4]);
-                    fetchStockData(); 
+                    fetchStockDataBackground(); 
                 }
-            } catch (error) { showNotification("พลาด", "ส่งข้อมูลไม่สำเร็จ", "danger"); document.getElementById('status-text').innerText = ""; }
+            } catch (error) { 
+                showNotification("พลาด", "ส่งข้อมูลไม่สำเร็จ", "danger"); 
+            } finally {
+                document.getElementById('status-text').innerText = "";
+                btnElement.disabled = false;
+            }
         }
 
         function updateStockTable() {
@@ -936,7 +1219,7 @@
                         <td style="text-align:center;">${imgHtml}</td>
                         <td class="search-barcode">${barcodeHtml}</td>
                         <td class="search-name"><strong>${item.name}</strong></td>
-                        <td class="search-lot">${item.lot}</td>
+                        <td class="search-lot">${item.lot || '-'}</td>
                         <td class="price-text">${item.price.toLocaleString()}</td>
                         <td style="text-align:center;">${qtyHtml}</td>
                         <td style="text-align:center;"><button class="btn-edit" onclick="openEditItem(${index})">✏️ แก้ไข</button></td>
@@ -1037,26 +1320,37 @@
                         document.getElementById('summary-in').innerText = result.summary.in.toLocaleString();
                         document.getElementById('summary-out').innerText = result.summary.out.toLocaleString();
                         document.getElementById('summary-stock').innerText = result.summary.stock.toLocaleString();
-                        showPage('closing-summary', null); fetchStockData(); 
+                        
+                        localStorage.removeItem('kakao_inventory_cache');
+                        showPage('closing-summary', null); fetchStockDataBackground(); 
                     }
                 } catch (error) { showNotification("พลาด", "ปิดยอดไม่สำเร็จ", "danger"); }
+                finally { document.getElementById('status-text').innerText = ""; }
             }
         }
 
-        async function saveLogoSetting() {
+        async function saveLogoSetting(btnElement) {
             let logoUrl = document.getElementById('setting-logo-url').value;
+            
+            if(btnElement.disabled) return;
+            btnElement.disabled = true;
             document.getElementById('status-text').innerText = "บันทึกโลโก้...";
+            
             try {
                 let response = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'updateLogo', logo: logoUrl, user: loggedInUser }) });
                 if ((await response.json()).status === 'success') {
-                    showNotification('เสร็จสิ้น', 'อัปเดตโลโก้แล้ว', 'info');
+                    showNotification('เสร็จสิ้น', 'อัปเดตโลโก้แล้ว', 'success');
                     let clean = formatImageUrl(logoUrl);
                     document.getElementById('main-company-logo').src = clean;
                     document.getElementById('setting-logo-preview').src = clean;
                     document.getElementById('setting-logo-preview').style.display = 'block';
-                    document.getElementById('status-text').innerText = "";
+                    localStorage.removeItem('kakao_inventory_cache');
                 }
             } catch (error) { showNotification("พลาด", "อัปเดตโลโก้ไม่ได้", "danger"); }
+            finally {
+                document.getElementById('status-text').innerText = "";
+                btnElement.disabled = false;
+            }
         }
     </script>
 </body>
